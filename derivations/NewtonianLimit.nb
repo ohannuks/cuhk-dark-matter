@@ -1,0 +1,151 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3820,        141]
+NotebookOptionsPosition[      3401,        122]
+NotebookOutlinePosition[      3737,        137]
+CellTagsIndexPosition[      3694,        134]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.656993215864871*^9, 3.65699321663907*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   FractionBox[
+    SuperscriptBox["\[CapitalEpsilon]", "2"], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["m", "p"], "2"], 
+     SuperscriptBox["c", "2"]}]], "-", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      FractionBox["Rs", "r"]}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["c", "2"], "+", 
+      FractionBox[
+       SuperscriptBox["h", "2"], 
+       SuperscriptBox["r", "2"]]}], ")"}]}]}], "//", 
+  "Expand"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "/.", 
+  RowBox[{"h", "\[Rule]", 
+   FractionBox["L", 
+    SubscriptBox["m", "p"]]}]}]}], "Input",
+ CellChangeTimes->{{3.656993211898045*^9, 3.656993272015188*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   SuperscriptBox["c", "2"]}], "-", 
+  FractionBox[
+   SuperscriptBox["h", "2"], 
+   SuperscriptBox["r", "2"]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["h", "2"], " ", "Rs"}], 
+   SuperscriptBox["r", "3"]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["c", "2"], " ", "Rs"}], "r"], "+", 
+  FractionBox[
+   SuperscriptBox["\[CapitalEpsilon]", "2"], 
+   RowBox[{
+    SuperscriptBox["c", "2"], " ", 
+    SubsuperscriptBox["m", "p", "2"]}]]}]], "Output",
+ CellChangeTimes->{{3.6569932130738564`*^9, 3.656993236447856*^9}, 
+   3.6569932724340353`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   SuperscriptBox["c", "2"]}], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["c", "2"], " ", "Rs"}], "r"], "-", 
+  FractionBox[
+   SuperscriptBox["L", "2"], 
+   RowBox[{
+    SuperscriptBox["r", "2"], " ", 
+    SubsuperscriptBox["m", "p", "2"]}]], "+", 
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["L", "2"], " ", "Rs"}], 
+   RowBox[{
+    SuperscriptBox["r", "3"], " ", 
+    SubsuperscriptBox["m", "p", "2"]}]], "+", 
+  FractionBox[
+   SuperscriptBox["\[CapitalEpsilon]", "2"], 
+   RowBox[{
+    SuperscriptBox["c", "2"], " ", 
+    SubsuperscriptBox["m", "p", "2"]}]]}]], "Output",
+ CellChangeTimes->{{3.6569932130738564`*^9, 3.656993236447856*^9}, 
+   3.656993272435804*^9}]
+}, Open  ]],
+
+Cell[BoxData[{"\"\<Newtonian:\>\"", "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[CapitalEpsilon]", "2"], 
+     RowBox[{
+      SuperscriptBox["c", "2"], " ", 
+      SubsuperscriptBox["m", "p", "2"]}]], "-", 
+    SuperscriptBox["c", "2"]}], ")"}], "-", 
+  RowBox[{"2", 
+   RowBox[{"\[CapitalPhi]", "[", "r", "]"}]}], "-", 
+  FractionBox[
+   SuperscriptBox["L", "2"], 
+   RowBox[{
+    SuperscriptBox["r", "2"], 
+    SuperscriptBox[
+     SubscriptBox["m", "p"], "2"]}]]}]}], "Input",
+ CellChangeTimes->{{3.656993277254459*^9, 3.656993318656164*^9}, {
+  3.656993545272624*^9, 3.6569936268666897`*^9}}]
+},
+WindowSize->{683, 688},
+WindowMargins->{{Automatic, 62}, {Automatic, 18}},
+FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 117, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[700, 26, 697, 24, 120, "Input"],
+Cell[1400, 52, 605, 20, 60, "Output"],
+Cell[2008, 74, 721, 24, 60, "Output"]
+}, Open  ]],
+Cell[2744, 101, 653, 19, 92, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,221 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6981,        212]
+NotebookOptionsPosition[      6638,        195]
+NotebookOutlinePosition[      6972,        210]
+CellTagsIndexPosition[      6929,        207]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.656991503923472*^9, 3.6569915046172256`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Reduce", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       FractionBox[
+        SuperscriptBox["\[CapitalEpsilon]", "2"], 
+        RowBox[{
+         SuperscriptBox[
+          SubscriptBox["m", "p"], "2"], 
+         SuperscriptBox["c", "2"]}]], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          FractionBox["Rs", "r"]}], ")"}], 
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox["c", "2"], "+", 
+          FractionBox[
+           SuperscriptBox["h", "2"], 
+           SuperscriptBox["r", "2"]]}], ")"}]}]}], ">", "0"}], "&&", 
+     RowBox[{
+      SubscriptBox["m", "p"], ">", "0"}], "&&", 
+     RowBox[{"c", ">", "0"}], "&&", 
+     RowBox[{"r", ">", "Rs", ">", "0"}]}], ",", "h", ",", "Reals"}], "]"}], "/.", 
+  RowBox[{"h", "\[Rule]", 
+   FractionBox["L", 
+    SubscriptBox["m", "p"]]}]}]], "Input",
+ CellChangeTimes->{{3.656991507118101*^9, 3.6569916281224937`*^9}, {
+  3.656991818789959*^9, 3.6569918649210167`*^9}, {3.656991909730714*^9, 
+  3.656991912820772*^9}, {3.656995223103875*^9, 3.656995235641097*^9}, {
+  3.656995271199196*^9, 3.6569952935345297`*^9}, {3.65699532369274*^9, 
+  3.656995396553286*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Rs", ">", "0"}], "&&", 
+  RowBox[{"r", ">", "Rs"}], "&&", 
+  RowBox[{
+   SubscriptBox["m", "p"], ">", "0"}], "&&", 
+  RowBox[{"c", ">", "0"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[CapitalEpsilon]", "<", 
+       RowBox[{"-", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", "r", " ", 
+            SubsuperscriptBox["m", "p", "2"]}], "-", 
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", "Rs", " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}], "r"]]}]}], "&&", 
+      RowBox[{
+       RowBox[{"-", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["r", "3"], " ", 
+            SuperscriptBox["\[CapitalEpsilon]", "2"]}], "-", 
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", 
+            SuperscriptBox["r", "3"], " ", 
+            SubsuperscriptBox["m", "p", "2"]}], "+", 
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", 
+            SuperscriptBox["r", "2"], " ", "Rs", " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}], 
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["c", "2"], " ", "r", " ", 
+            SubsuperscriptBox["m", "p", "2"]}], "-", 
+           RowBox[{
+            SuperscriptBox["c", "2"], " ", "Rs", " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}]]]}], "<", 
+       FractionBox["L", 
+        SubscriptBox["m", "p"]], "<", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["r", "3"], " ", 
+           SuperscriptBox["\[CapitalEpsilon]", "2"]}], "-", 
+          RowBox[{
+           SuperscriptBox["c", "4"], " ", 
+           SuperscriptBox["r", "3"], " ", 
+           SubsuperscriptBox["m", "p", "2"]}], "+", 
+          RowBox[{
+           SuperscriptBox["c", "4"], " ", 
+           SuperscriptBox["r", "2"], " ", "Rs", " ", 
+           SubsuperscriptBox["m", "p", "2"]}]}], 
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["c", "2"], " ", "r", " ", 
+           SubsuperscriptBox["m", "p", "2"]}], "-", 
+          RowBox[{
+           SuperscriptBox["c", "2"], " ", "Rs", " ", 
+           SubsuperscriptBox["m", "p", "2"]}]}]]]}]}], ")"}], "||", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[CapitalEpsilon]", ">", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["c", "4"], " ", "r", " ", 
+           SubsuperscriptBox["m", "p", "2"]}], "-", 
+          RowBox[{
+           SuperscriptBox["c", "4"], " ", "Rs", " ", 
+           SubsuperscriptBox["m", "p", "2"]}]}], "r"]]}], "&&", 
+      RowBox[{
+       RowBox[{"-", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["r", "3"], " ", 
+            SuperscriptBox["\[CapitalEpsilon]", "2"]}], "-", 
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", 
+            SuperscriptBox["r", "3"], " ", 
+            SubsuperscriptBox["m", "p", "2"]}], "+", 
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", 
+            SuperscriptBox["r", "2"], " ", "Rs", " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}], 
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["c", "2"], " ", "r", " ", 
+            SubsuperscriptBox["m", "p", "2"]}], "-", 
+           RowBox[{
+            SuperscriptBox["c", "2"], " ", "Rs", " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}]]]}], "<", 
+       FractionBox["L", 
+        SubscriptBox["m", "p"]], "<", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["r", "3"], " ", 
+           SuperscriptBox["\[CapitalEpsilon]", "2"]}], "-", 
+          RowBox[{
+           SuperscriptBox["c", "4"], " ", 
+           SuperscriptBox["r", "3"], " ", 
+           SubsuperscriptBox["m", "p", "2"]}], "+", 
+          RowBox[{
+           SuperscriptBox["c", "4"], " ", 
+           SuperscriptBox["r", "2"], " ", "Rs", " ", 
+           SubsuperscriptBox["m", "p", "2"]}]}], 
+         RowBox[{
+          RowBox[{
+           SuperscriptBox["c", "2"], " ", "r", " ", 
+           SubsuperscriptBox["m", "p", "2"]}], "-", 
+          RowBox[{
+           SuperscriptBox["c", "2"], " ", "Rs", " ", 
+           SubsuperscriptBox["m", "p", "2"]}]}]]]}]}], ")"}]}], 
+   ")"}]}]], "Output",
+ CellChangeTimes->{{3.656991514200656*^9, 3.6569915785884523`*^9}, 
+   3.656991631193568*^9, {3.656991855377494*^9, 3.656991865375844*^9}, {
+   3.656995236787773*^9, 3.656995245245637*^9}, {3.656995283358959*^9, 
+   3.6569952945107203`*^9}, {3.6569953281398163`*^9, 3.656995396947569*^9}}]
+}, Open  ]]
+},
+WindowSize->{683, 688},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 120, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[703, 26, 1211, 34, 120, "Input"],
+Cell[1917, 62, 4705, 130, 352, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
