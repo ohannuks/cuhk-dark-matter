@@ -24,14 +24,13 @@ const bool check( const Real ERROR ) {
 }
 
 //Constants
-const Real m = pow(10,6); // Solar mass
-const Real M = pow(10,12); // Solar mass
-const Real a = 20*2.09*pow(10,16); // 20 kpc to solar mass
-const Real G = 1;
-const Real Rs = 2*m*G; // Schwarzschild radius
-const Real mm = m/M;
-
-
+const Real a = 20000;
+const Real M = 1e12;
+const Real m = 4e6;
+const Real G = 4.49e-15;
+const Real c = 0.3064;
+const Real mp = 1e-3;
+const Real Rs=2*G*m/pow(c,2);
 
 // Calculate radial action:
 namespace Hernquist {
@@ -48,16 +47,14 @@ namespace Hernquist {
     // See hernquist.nb
     // We first solve limits for r
     // c[0]u^3+...
-    const Real mp= 1; // Mass of the particle
-    const Real c = 1; // Speed of light
-    //THESE COEFFICIENTS WERE CHECKED 19.11.
-    coeffs[0] = 2.0*G*M*eps/a;
+    //THESE COEFFICIENTS WERE CHECKED 20.11.
+    coeffs[0] = 2*eps*mp;
 
-    coeffs[1] = 2.0*G*M*(eps-1);
+    coeffs[1] = (2*a*eps*mp+2*G*M*pow(mp,2));
 
-    coeffs[2] = pow(L,2);
+    coeffs[2] = -1*pow(L,2);
 
-    coeffs[3] = a*pow(L,2);
+    coeffs[3] = -1*a*pow(L,2);
     
     // Solve:
     rpoly_ak1(coeffs, &degree, results, results_im);
@@ -88,17 +85,16 @@ namespace Hernquist {
     // Get parameters
     const double * parameters;
     parameters = (double*) params;
-    const Real R1 = parameters[0];
-    const Real R2 = parameters[1];
-    const Real R3 = parameters[2];
-    const Real eps = parameters[3];
+    //These are inputted via the integration function (GSL)
+    const Real eps = parameters[0];
+    const Real L = parameters[1];
     
-    // See FourVelocity.nb
-    const Real c=1; const Real mp=1; // just set it all to 1 :)
-    const Real sqrtParameter = -((eps*G*M*(r - R1)*(r - R2)*(r - R3))/
-     (a*mp*Power(r,2)*(a + r)));
+    // See Newtonian.nb
+    const Real sqrtParameter = (2*eps)/mp - pow(L,2)/(pow(mp,2)*pow(r,2)) + 
+   (2*G*M)/(a + r);
+    // If imaginary, no contribution to the integral
     if( sqrtParameter < 0 ) { cerr << "Bad sqrtParameter" << endl; return 0; }
-    const Real fourVelocity = sqrt(2.0) * sqrt(sqrtParameter);
+    const Real fourVelocity = sqrt(sqrtParameter);
     const Real integrand = fourVelocity;
     
     assert( integrand >= 0 );
@@ -108,8 +104,8 @@ namespace Hernquist {
   }
   
   Real II_radial( const Real eps, const Real LL ) {
-    // Note: eps = relativistic energy per particle 0<eps<1
-    // And: LL = Relativistic angular momentum per unit mass (larger than 2 Rs)
+    // Note: eps = Newtonian energy
+    // And: LL = Newtonian angular momentum
     assert( 0<eps && eps<1 );
     Real Rlimits[3]={ERROR};
     R_limits(eps, LL, Rlimits); // Get limits
@@ -130,7 +126,7 @@ namespace Hernquist {
      
       gsl_function integrand;
      
-      double parameters[4] = {Rlimits[0], Rlimits[1], Rlimits[2], eps};
+      double parameters[2] = {eps,LL};
       integrand.function = &integrand_function;
       integrand.params   = &parameters[0];
      
@@ -159,22 +155,23 @@ namespace Hernquist {
 namespace BlackHole {
   ofstream output;
 
-  void eps_limits( const Real r, Real epsLimits[2] ) {
-    if( r>= 6.0 * G * m ) {
-      epsLimits[0] = (1.+2*G*m/r)/sqrt(1.+6*G*m/r);
-    } else if( r >= 4.0*G*m ) {
-      epsLimits[0] = (1.-2*G*m/r)/sqrt(1.-3*G*m/r);
-    } else { assert(1==0); }
-    epsLimits[1] = 1;
-    return;
-  }
-
-  void L_limits( const Real eps, const Real r, LLimits[2] ) {
-    LLimits[0] = sqrt(32.*pow(G*m,2) / 
-        36.*pow(eps,2)-27.*pow(eps,4)-8.+eps*pow(9.*pow(eps,2)-8,3./2.));
-    LLimits[1] = r*sqrt(pow(eps,2)/(1.-2.*G*m/r)-1.);
-    return;
-  }
+  // Unsupported
+//  void eps_limits( const Real r, Real epsLimits[2] ) {
+//    if( r>= 6.0 * G * m ) {
+//      epsLimits[0] = (1.+2*G*m/r)/sqrt(1.+6*G*m/r);
+//    } else if( r >= 4.0*G*m ) {
+//      epsLimits[0] = (1.-2*G*m/r)/sqrt(1.-3*G*m/r);
+//    } else { assert(1==0); }
+//    epsLimits[1] = 1;
+//    return;
+//  }
+//
+//  void L_limits( const Real eps, const Real r, LLimits[2] ) {
+//    LLimits[0] = sqrt(32.*pow(G*m,2) / 
+//        36.*pow(eps,2)-27.*pow(eps,4)-8.+eps*pow(9.*pow(eps,2)-8,3./2.));
+//    LLimits[1] = r*sqrt(pow(eps,2)/(1.-2.*G*m/r)-1.);
+//    return;
+//  }
 
   
   
