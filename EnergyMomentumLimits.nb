@@ -1,0 +1,121 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3157,        112]
+NotebookOptionsPosition[      2666,         91]
+NotebookOutlinePosition[      3000,        106]
+CellTagsIndexPosition[      2957,        103]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.656886059363701*^9, 3.6568860604051857`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"x", "=", 
+  FractionBox["r", "a"]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["\[CapitalEpsilon]", "min"], "=", "0"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["\[CapitalEpsilon]", "max"], "=", 
+  FractionBox["1", 
+   RowBox[{"1", "+", "x"}]]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["L", "min"], "=", "0"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["L", "max"], "=", 
+  SqrtBox[
+   RowBox[{"2", 
+    SuperscriptBox["x", "2"], 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["\[CapitalEpsilon]", "max"], "-", "\[Epsilon]"}], ")"}], 
+    " ", 
+    RowBox[{"(", 
+     RowBox[{"a", " ", "G", " ", "M"}], 
+     ")"}]}]]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{
+  3.6568860622122097`*^9, {3.6568864702812967`*^9, 3.656886538239922*^9}, {
+   3.656886569903749*^9, 3.6568865738612022`*^9}, {3.6568873000507517`*^9, 
+   3.656887305448111*^9}, {3.656887475439434*^9, 3.656887492329266*^9}}],
+
+Cell[BoxData[
+ FractionBox["r", "a"]], "Output",
+ CellChangeTimes->{3.656886575027713*^9, 3.6568873066943083`*^9, 
+  3.6568874966216393`*^9}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.656886575027713*^9, 3.6568873066943083`*^9, 
+  3.656887496623423*^9}],
+
+Cell[BoxData[
+ FractionBox["1", 
+  RowBox[{"1", "+", 
+   FractionBox["r", "a"]}]]], "Output",
+ CellChangeTimes->{3.656886575027713*^9, 3.6568873066943083`*^9, 
+  3.65688749662501*^9}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.656886575027713*^9, 3.6568873066943083`*^9, 
+  3.656887496626566*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  SqrtBox["2"], " ", 
+  SqrtBox[
+   FractionBox[
+    RowBox[{"G", " ", "M", " ", 
+     SuperscriptBox["r", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       FractionBox["1", 
+        RowBox[{"1", "+", 
+         FractionBox["r", "a"]}]], "-", "\[Epsilon]"}], ")"}]}], 
+    "a"]]}]], "Output",
+ CellChangeTimes->{3.656886575027713*^9, 3.6568873066943083`*^9, 
+  3.656887496628141*^9}]
+}, Open  ]]
+},
+WindowSize->{681, 688},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 120, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[703, 26, 961, 26, 204, "Input"],
+Cell[1667, 54, 141, 3, 46, "Output"],
+Cell[1811, 59, 119, 2, 32, "Output"],
+Cell[1933, 63, 183, 5, 58, "Output"],
+Cell[2119, 70, 119, 2, 32, "Output"],
+Cell[2241, 74, 409, 14, 83, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
