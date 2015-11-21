@@ -14,6 +14,8 @@
 #include <iomanip>      // std::setprecision
 #include "rk.h"
 
+#include <cstring>
+
 typedef double Real;
 using namespace std;
 
@@ -36,8 +38,10 @@ const Real Rs=2*G*m/pow(c,2);
 namespace Hernquist {
   ofstream output;
 
-  
+  //Solves limits of the equation
   void R_limits( const Real eps, const Real L, Real Rlimits[3] ) {
+    // eps = newtonian energy
+    // L = newtonian angular momentum
     // Solve third order polynomial:
     double results[MAXDEGREE] = {0};
     double results_im[MAXDEGREE] = {0};
@@ -63,7 +67,7 @@ namespace Hernquist {
     
     // Check results:
     for( int  i = 0; i < 3; ++i ) { 
-      if( results_im[i] != 0) { Rlimits[0]=ERROR; Rlimits[1]=ERROR; return;} 
+      if( results_im[i] != 0) { Rlimits[0]=ERROR; Rlimits[1]=ERROR; cout << "IMAGINARY VALUES" << endl; return;} 
     }
     if( results[0] > 0 ) {
       cout << "VALUES:" << endl;
@@ -93,7 +97,7 @@ namespace Hernquist {
     const Real sqrtParameter = (2*eps)/mp - pow(L,2)/(pow(mp,2)*pow(r,2)) + 
    (2*G*M)/(a + r);
     // If imaginary, no contribution to the integral
-    if( sqrtParameter < 0 ) { cerr << "Bad sqrtParameter" << endl; return 0; }
+    if( sqrtParameter < 0 ) { cerr << "Bad sqrtParameter "; cout << r << " " << eps << " " << L << " " << sqrtParameter << endl; return 0; }
     const Real fourVelocity = sqrt(sqrtParameter);
     const Real integrand = fourVelocity;
     
@@ -106,10 +110,15 @@ namespace Hernquist {
   Real II_radial( const Real eps, const Real LL ) {
     // Note: eps = Newtonian energy
     // And: LL = Newtonian angular momentum
-    assert( 0<eps && eps<1 );
+    cout << eps << endl;
+    assert( eps<0 );
     Real Rlimits[3]={ERROR};
     R_limits(eps, LL, Rlimits); // Get limits
-    if( !check(Rlimits[0]) ) return ERROR; // Check for bad results
+    cout << eps << " " << LL << endl;
+    //assert( check(Rlimits[0]));
+    cout << __LINE__ << endl;
+    if( !check(Rlimits[0]) ) return 1e-40; // Check for bad results
+    cout << __LINE__ << endl;
     
     Real integral = 0;
     
@@ -133,11 +142,12 @@ namespace Hernquist {
       // Please refer to hernquist.nb and Sadeghian article for these
       const Real Rmin = Rlimits[1];
       const Real Rmax = Rlimits[2];
+      assert( Rmin>0 && Rmax>0 );
       
-      gsl_integration_qags( &integrand, Rlimits[1], Rlimits[2],
+      gsl_integration_qags( &integrand, Rmin, Rmax,
                             abs_error, rel_error, limit, work_space,
                             &result, &error );
-     
+      cout << result << " " << eps << " " << LL << " " << Rmin << " " << Rmax << " " << Rlimits[0] << endl;
       assert( abs(result) > 1e5*abs(error) );
      
       gsl_integration_workspace_free( work_space ); // Free memory
@@ -312,20 +322,25 @@ Real f_H( const double dimless_eps ) {
 }
 
 Real solve_radial_action( Real x, void * params ) {
+  // x = energy
+  assert( x< 0);
   double * parameters = (double*)params;
 
   // Returns I_bh - I_h
   Real eps = parameters[0];
   Real L = parameters[1];
   Real radialBH = parameters[2];
-
-  return radialBH - Hernquist::II_radial(x, L);
+  Real radialHernquist = Hernquist::II_radial(x, L);
+  cout << radialBH << " " << radialHernquist << endl;
+  return radialBH - radialHernquist;
 }
 
 
 Real transform_energy( const Real eps, const Real L ) {
+  assert( eps < 0 );
   //This transforms the energy from relativistic basis to newtonian basis by equating the radial action integrals
   Real I_bh = BlackHole::II_radial(eps, L);
+  assert(check( I_bh ));
   // Find the new energy
   Real E_dimensionless_newtonian = ERROR;
   
@@ -348,14 +363,17 @@ Real transform_energy( const Real eps, const Real L ) {
   //save_function_output(limits, E, L); return 0;
   //solve_limits( limits, L, r );
   Real limits[2] = {ERROR};
-  // Limits are from -potential(0) to 0
-  limits[0] = -1*G*M/a;
-  limits[1] = 0;
+  // Limits are from 
+  limits[0] = -1*G*M/a*(1-1e-7);
+  limits[1] = -1*G*M/a*1e-7;
   gsl_root_fsolver_set(solver, &function, limits[0], limits[1]);
+  cout << __LINE__ << endl;
 
   for( int j = 0; j < 1000; ++j ) {
   // Iterate:
   int status = gsl_root_fsolver_iterate(solver);
+  
+  cout << __LINE__ << endl;
   
   // Check convergence:  
   if (status == GSL_SUCCESS)
@@ -398,6 +416,8 @@ Real rho(const Real r, const int N) {
       const Real eepsmax = BlackHole::dimless_eps_max(r, 0);
       const Real eepsmin = BlackHole::dimless_eps_min(r, 0);
       // Note: eps is now in the dimensions of Joules (energy) and it is not dimensionless
+      assert( BlackHole::eps_min(r,0) < 0 );
+      assert( BlackHole::eps_max(r,0) < 0 );
       const Real eps = BlackHole::eps_min(r,0)+u*(BlackHole::eps_max(r,0)-BlackHole::eps_min(r,0));
       const Real LLmax = BlackHole::dimless_L_max(r, eps);
       const Real LLmin = BlackHole::dimless_L_min(r, eps);
@@ -409,23 +429,28 @@ Real rho(const Real r, const int N) {
                 * f_H(transform_energy(u,z));
     }
   }
-  return 1./(sqrt(2)*pow(2*pi,2))*(M/pow(a,3)) * (a*BlackHole::dimless_eps_max()/(r-2*g*m/pow(c,2)))
+  return 1./(sqrt(2)*pow(2*pi,2))*(M/pow(a,3)) * (a*BlackHole::dimless_eps_max(r, 0)/(r-2*G*m/pow(c,2)))
   * integral;
   return 0;
 }
 
 int main(int argc, char **argv) {
-  //Tests
-  cout << "Black hole" << endl;
-  cout << BlackHole::II_radial(0.999,2.*Rs*sqrt(15)) << endl;
-  cout << Hernquist::II_radial(a*pow(10,-26)/(G*M),2.*Rs*sqrt(15)) << endl;
-  // Integration:
-  const Real r = 20*G*m/pow(c,2);
-  cout << rho(r) << endl;
-  {
-    BlackHole::output.open("blackhole_output.dat");
-
-    BlackHole::output.close();
+  if( argc>1 && strcmp(argv[0], "test") ) {
+    //Tests
+    cout << "Test:" << endl;
+    cout << "Newtonian: Should be 0.154553 " << endl;
+    cout << Hernquist::II_radial(-2.1e-10,7.77632e-8) << endl;
+    cout << "Tests done" << endl;
+  } else {
+  
+    // Integration:
+    const Real r = 20*G*m/pow(c,2);
+    cout << rho(r,500) << endl;
+    {
+      BlackHole::output.open("blackhole_output.dat");
+  
+      BlackHole::output.close();
+    }
   }
     return 0;
 }
