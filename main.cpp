@@ -185,22 +185,16 @@ namespace BlackHole {
     // See FourVelocity.nb
     // We first solve limits for u
     // c[0]u^3+...
+    //Changed 20.11.
     const Real mp= 1; // Mass of the particle
     const Real c = 1; // Speed of light
-    coeffs[0] = -1.*(pow(L,4) * Rs)
-               / (pow(eps,2)*pow(mp,2));
+    coeffs[0] = -1.*pow(L,4)*Rs/(pow(eps,2)*pow(mp,2));
 
-    coeffs[1] = pow(L,4)
-               / (pow(eps,2)*pow(mp,2));
+    coeffs[1] = pow(L,4)/(pow(eps*mp,2));
 
-    coeffs[2] = -1.*pow(c,2) * pow(L,2) * Rs
-               / pow(eps,2);
+    coeffs[2] = -1.*pow(c,2)*pow(L,2)*Rs/pow(eps,2);
 
-    coeffs[3] = ( pow(c,2) * pow(L,2) )
-               / pow(eps,2) 
-	        -
-	        pow(L,2)
-               / ( pow(c,2) * pow(mp,2) );
+    coeffs[3] = pow(c,2)*pow(L,2)/pow(eps,2)-pow(L,2)/(pow(c,2)*pow(mp,2));
     
     // Solve:
     rpoly_ak1(coeffs, &degree, results, results_im);
@@ -223,14 +217,10 @@ namespace BlackHole {
     const Real eps = parameters[0];
     const Real L = parameters[1];
     
-    // See FourVelocity.nb
-    const Real c=1; const Real mp=1; // just set it all to 1 :)
-    const Real sqrtParameter =
-    pow(c,2)*(Rs*u-1.0)
-    +
-    (pow(c,2)*pow(L,2)*pow(u,2)*(Rs*u-1.0)+pow(eps,2))
-     / (pow(c,2)*pow(mp,2))
-    ;
+    // See Schwarzschild.nb
+    const Real sqrtParameter =pow(c,2)*(-1 + Rs*u) + 
+   (pow(eps,2) + pow(c,2)*pow(L,2)*pow(u,2)*
+       (-1 + Rs*u))/(pow(c,2)*pow(mp,2));
     if( sqrtParameter < 0 ) { cerr << "Bad sqrtParameter" << endl; return 0; }
     const Real fourVelocity = -1.0*sqrt(sqrtParameter);
     const Real integrand = -1.0*fourVelocity / pow(u,2);
