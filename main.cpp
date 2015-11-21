@@ -276,8 +276,8 @@ namespace BlackHole {
 
 inline
 Real f_h( const double eps ) {
-  const double result =   sqrt(E)/pow(1-E,2)*
-  ((1.-2.*E)*(8*E*E-8*E-3.)+3.*asin(sqrt(E))/sqrt(E*(1-E)))
+  const double result =   sqrt(eps)/pow(1-eps,2)*
+  ((1.-2.*eps)*(8*eps*eps-8*eps-3.)+3.*asin(sqrt(eps))/sqrt(eps*(1-eps)))
 ;
 
   assert( result >= 0 );
@@ -294,8 +294,8 @@ Real rho(const Real r, const int N) {
 //#pragma omp parallel for schedule(dynamic) reduction(+:integral)
   for( int u_i = 0; u_i < N; ++u_i ) {
     for( int z_i = 0; z_i < N; ++z_i ) {
-      const Real u = rRand(0,1);
-      const Real z = rRand(0,1);
+      //const Real u = rRand(0,1);
+      //const Real z = rRand(0,1);
 
 //      //FIXME: 5e-4
 //      const Real u = rRand(0,1-8.e-4);
@@ -318,8 +318,8 @@ int main(int argc, char **argv) {
   cout << BlackHole::II_radial(0.999,2.*Rs*sqrt(15)) << endl;
   cout << Hernquist::II_radial(a*pow(10,-26)/(G*M),2.*Rs*sqrt(15)) << endl;
   // Integration:
-  r = 12.0 * G * m;
-  rho(r);
+//  r = 12.0 * G * m;
+//  rho(r);
   {
     BlackHole::output.open("blackhole_output.dat");
 
