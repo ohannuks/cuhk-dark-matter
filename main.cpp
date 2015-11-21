@@ -155,25 +155,53 @@ namespace Hernquist {
 namespace BlackHole {
   ofstream output;
 
-  // Unsupported
-//  void eps_limits( const Real r, Real epsLimits[2] ) {
-//    if( r>= 6.0 * G * m ) {
-//      epsLimits[0] = (1.+2*G*m/r)/sqrt(1.+6*G*m/r);
-//    } else if( r >= 4.0*G*m ) {
-//      epsLimits[0] = (1.-2*G*m/r)/sqrt(1.-3*G*m/r);
-//    } else { assert(1==0); }
-//    epsLimits[1] = 1;
-//    return;
-//  }
-//
-//  void L_limits( const Real eps, const Real r, LLimits[2] ) {
-//    LLimits[0] = sqrt(32.*pow(G*m,2) / 
-//        36.*pow(eps,2)-27.*pow(eps,4)-8.+eps*pow(9.*pow(eps,2)-8,3./2.));
-//    LLimits[1] = r*sqrt(pow(eps,2)/(1.-2.*G*m/r)-1.);
-//    return;
-//  }
-
+  // Note; eps_min and eps_max have now the energy dimension (joule)
+  Real eps_min( const Real r, const Real eps ) {
+    assert( r>0 && r>3*G*m );
+    if( r>=6*G*m ) {
+      return (pow(c,2)*mp*(1 + (2*G*m)/r))/sqrt(1 + (6*G*m)/r);
+    } else if( 4*G*m <= r ) {
+      return (pow(c,2)*mp*(1 - (2*G*m)/r))/sqrt(1 - (3*G*m)/r);
+    } else {
+      assert( 1==0 );
+    }
+    return ERROR;
+  }
   
+  Real eps_max( const Real r, const Real eps ) {
+    assert( r>0 && r>3*G*m);
+    return mp*pow(c,2);
+  }
+  
+  Real L_min( const Real r, const Real eps ) {
+    return 4*sqrt(2)*c*sqrt((pow(G,2)*pow(m,2))/
+     (-8 - (27*pow(eps,4))/(pow(c,8)*pow(mp,4)) + 
+       (36*pow(eps,2))/(pow(c,4)*pow(mp,2)) + 
+       (eps*pow(-8 + (9*pow(eps,2))/
+         (pow(c,4)*pow(mp,2)),1.5))/(pow(c,2)*mp))) * mp;
+  }
+  
+  Real L_max( const Real r, const Real eps ) {
+    return c*mp*r*sqrt(-1 + (pow(eps,2)*r)/
+      (pow(c,4)*pow(mp,2)*(-2*G*m + r)));
+  }
+  
+  Real dimless_eps_max( const Real r, const Real eps ) {
+    return (a*(-1.*eps_min(r,eps) + pow(c,2)*mp))/(G*M*mp);
+  }
+  
+  Real dimless_eps_min( const Real r, const Real eps ) {
+    return (a*(-1.*eps_max(r,eps) + pow(c,2)*mp))/(G*M*mp);
+  }
+  
+  Real dimless_L_max( const Real r, const Real eps ) {
+    return L_min(r,eps)/(sqrt(a*G*M)*mp);
+  }
+  
+  Real dimless_L_min( const Real r, const Real eps ) {
+    return L_min(r,eps)/(sqrt(a*G*M)*mp);
+  }
+
   
   void u_limits( const Real eps, const Real L, Real ulimits[2] ) {
     // Solve third order polynomial:
@@ -275,14 +303,80 @@ namespace BlackHole {
 }
 
 inline
-Real f_h( const double eps ) {
-  const double result =   sqrt(eps)/pow(1-eps,2)*
-  ((1.-2.*eps)*(8*eps*eps-8*eps-3.)+3.*asin(sqrt(eps))/sqrt(eps*(1-eps)))
+Real f_H( const double dimless_eps ) {
+  const double result =   sqrt(dimless_eps)/pow(1-dimless_eps,2)*
+  ((1.-2.*dimless_eps)*(8*dimless_eps*dimless_eps-8*dimless_eps-3.)+3.*asin(sqrt(dimless_eps))/sqrt(dimless_eps*(1-dimless_eps)))
 ;
-
   assert( result >= 0 );
   return result;
 }
+
+Real solve_radial_action( Real x, void * params ) {
+  double * parameters = (double*)params;
+
+  // Returns I_bh - I_h
+  Real eps = parameters[0];
+  Real L = parameters[1];
+  Real radialBH = parameters[2];
+
+  return radialBH - Hernquist::II_radial(x, L);
+}
+
+
+Real transform_energy( const Real eps, const Real L ) {
+  //This transforms the energy from relativistic basis to newtonian basis by equating the radial action integrals
+  Real I_bh = BlackHole::II_radial(eps, L);
+  // Find the new energy
+  Real E_dimensionless_newtonian = ERROR;
+  
+  Real root;
+  // Find root:
+  //<GSL>
+  // Define function;
+  gsl_function function;
+  Real parameters[3] = {eps,L,I_bh};
+  function.function = &solve_radial_action;
+  function.params = &parameters[0];
+
+  // Set up solver:
+  const gsl_root_fsolver_type * solver_type;
+  gsl_root_fsolver * solver;
+  solver_type = gsl_root_fsolver_brent; // Bisection method
+  solver = gsl_root_fsolver_alloc( solver_type ); // Allocate
+
+  // Set up the solver with limits [0,E_max]
+  //save_function_output(limits, E, L); return 0;
+  //solve_limits( limits, L, r );
+  Real limits[2] = {ERROR};
+  // Limits are from -potential(0) to 0
+  limits[0] = -1*G*M/a;
+  limits[1] = 0;
+  gsl_root_fsolver_set(solver, &function, limits[0], limits[1]);
+
+  for( int j = 0; j < 1000; ++j ) {
+  // Iterate:
+  int status = gsl_root_fsolver_iterate(solver);
+  
+  // Check convergence:  
+  if (status == GSL_SUCCESS)
+    printf ("Converged:\n");
+
+  // Get Solver's current solution:
+  root = gsl_root_fsolver_root(solver);
+  cout << root << endl;
+  if( gsl_root_fsolver_x_upper(solver) - gsl_root_fsolver_x_lower(solver) < 1.0e-30 ) {
+    cout << "Breaking" << endl;
+    break;
+  }
+  //limits[0] = gsl_root_fsolver_x_lower(solver);
+  //limits[1] = gsl_root_fsolver_x_upper(solver);
+  }
+  
+  gsl_root_fsolver_free( solver );
+  //</GSL>
+}
+
+const Real pi = 3.141592653589793;
 
 Real rho(const Real r, const int N) {
   assert( r > 0 );
@@ -292,23 +386,31 @@ Real rho(const Real r, const int N) {
 
   // Calculate integral:
 //#pragma omp parallel for schedule(dynamic) reduction(+:integral)
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_real_distribution<> dis(0+1.0e-5,1-1.0e-5);
   for( int u_i = 0; u_i < N; ++u_i ) {
     for( int z_i = 0; z_i < N; ++z_i ) {
-      //const Real u = rRand(0,1);
-      //const Real z = rRand(0,1);
+      const Real u = dis(gen);
+      const Real z = dis(gen);
+      assert( z != 0 && u != 0 && z != 1 && u != 1 );
+      
+      const Real eepsmax = BlackHole::dimless_eps_max(r, 0);
+      const Real eepsmin = BlackHole::dimless_eps_min(r, 0);
+      // Note: eps is now in the dimensions of Joules (energy) and it is not dimensionless
+      const Real eps = BlackHole::eps_min(r,0)+u*(BlackHole::eps_max(r,0)-BlackHole::eps_min(r,0));
+      const Real LLmax = BlackHole::dimless_L_max(r, eps);
+      const Real LLmin = BlackHole::dimless_L_min(r, eps);
+      // Note: L is now in the right dimensions too!
+      const Real L = sqrt(z*pow(LLmax,2)+(1-z)*pow(LLmin,2))*sqrt(a*G*M)*mp;
 
-//      //FIXME: 5e-4
-//      const Real u = rRand(0,1-8.e-4);
-//      const Real z = rRand(0,1-8.e-4);
-//      assert( z != 0 && u != 0 && z != 1 && u != 1 );
-//      integral += (1.-(G*M/a0)*Rel::E_max(r)*u) *
-//                  sqrt((Rel::L_max2(u,r)-Rel::L_min2(u,r))/(1-z)) *
-//                  hernquist_f(E_initial(u,z,r)) * du*dz;
-//      assert(integral >= 0);
-//      //if ((u_i+z_i)%100 == 0)
-//      //cout << "Iteration:" << u_i << " " << z_i << endl;
+      integral += (1.0-(G*M/pow(c,2) / a)*eepsmax*u)
+                * sqrt((pow(LLmax,2)-pow(LLmin,2))/(1-z))
+                * f_H(transform_energy(u,z));
     }
   }
+  return 1./(sqrt(2)*pow(2*pi,2))*(M/pow(a,3)) * (a*BlackHole::dimless_eps_max()/(r-2*g*m/pow(c,2)))
+  * integral;
   return 0;
 }
 
@@ -318,8 +420,8 @@ int main(int argc, char **argv) {
   cout << BlackHole::II_radial(0.999,2.*Rs*sqrt(15)) << endl;
   cout << Hernquist::II_radial(a*pow(10,-26)/(G*M),2.*Rs*sqrt(15)) << endl;
   // Integration:
-//  r = 12.0 * G * m;
-//  rho(r);
+  const Real r = 20*G*m/pow(c,2);
+  cout << rho(r) << endl;
   {
     BlackHole::output.open("blackhole_output.dat");
 
