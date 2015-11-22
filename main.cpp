@@ -251,12 +251,12 @@ namespace BlackHole {
     const Real dimensional_L = L*sqrt(a*G*M);
     // Check ulimits
     {
-    assert( dimensional_eps < 1 );
-    assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
-    // Better be safe than sorry, see ulimits appendix
-    assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
-          dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
-        (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
+      assert( 0 < dimensional_eps && dimensional_eps < 1 );
+      assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
+      // Better be safe than sorry, see ulimits appendix
+      assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
+            dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
+          (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
     }
 
     // Solve third order polynomial:
@@ -286,7 +286,6 @@ namespace BlackHole {
       if( results_im[i] != 0) { ulimits[0]=ERROR; ulimits[1]=ERROR; return;} 
     }
 
-    if( results[0] <= 0 ) { ulimits[0]=ERROR; ulimits[1]=ERROR; cout << "bad data" << endl; return;}
     if( results[0] > results[1]){ ulimits[0]=ERROR; ulimits[1]=ERROR; cout << "errordata" << endl; return; }
     ulimits[0] = results[0];
     ulimits[1] = results[1];
@@ -344,7 +343,7 @@ namespace BlackHole {
     
     Real ulimits[2]={ERROR};
     u_limits(eps, L, ulimits); // Get limits
-    assert( !check(ulimits[0]) );
+    assert( check(ulimits[0]) );
     if( !check(ulimits[0]) ) return ERROR; // Check for bad results
     
     Real integral = 0;
