@@ -160,60 +160,72 @@ namespace Hernquist {
   }
 }
 
-
 // Calculate radial action:
 namespace BlackHole {
   ofstream output;
 
-  // Note; eps_min and eps_max have now the energy dimension (joule)
-  Real eps_min( const Real r, const Real eps ) {
-    assert( r>0 && r>3*G*m );
-    if( r>=6*G*m ) {
-      return (pow(c,2)*mp*(1 + (2*G*m)/r))/sqrt(1 + (6*G*m)/r);
-    } else if( 4*G*m <= r ) {
-      return (pow(c,2)*mp*(1 - (2*G*m)/r))/sqrt(1 - (3*G*m)/r);
+  // Define dimensionless energy and angular momentum per particle mass with c=1
+  // Input is always dimensionless eps!
+  // COMMENT: dont change these, they've been changed way too many times already
+  Real epsmax( const Real r, const Real eps ) {
+    assert( r > 2.*G*m );
+    Real eps_dimensional = ERROR;
+    if( r >= 6.*G*m ) {
+      eps_dimensional = (1. + (2.*G*m)/r)/sqrt(1. + (6.*G*m)/r);
+    } else if( r >= 4.*G*m ) {
+      eps_dimensional = (1. - (2.*G*m)/r)/sqrt(1. - (3.*G*m)/r);
     } else {
       assert( 1==0 );
     }
-    return ERROR;
+    return a/(G*M) * (1.-eps_dimensional);
   }
   
-  Real eps_max( const Real r, const Real eps ) {
-    assert( r>0 && r>3*G*m);
-    return mp*pow(c,2);
+  Real epsmin( const Real r, const Real eps ) { 
+    assert( r > 2.*G*m );
+    // Dimensionless
+    return 0;
   }
   
-  Real L_min( const Real r, const Real eps ) {
-    return 4*sqrt(2)*c*sqrt((pow(G,2)*pow(m,2))/
-     (-8 - (27*pow(eps,4))/(pow(c,8)*pow(mp,4)) + 
-       (36*pow(eps,2))/(pow(c,4)*pow(mp,2)) + 
-       (eps*pow(-8 + (9*pow(eps,2))/
-         (pow(c,4)*pow(mp,2)),1.5))/(pow(c,2)*mp))) * mp;
+  Real Lmin( const Real r, const Real eps ) {
+    assert( eps >= 0 && eps >= epsmin(r,eps) );
+    assert( eps <= 1 );
+    assert( r > 2.*G*m );
+    // Note: we use dimensionless eps;
+    const Real dimensional_eps = 1.-(G*M/a) * eps;
+    Real L_dimensional = ERROR;
+    L_dimensional = 4.*sqrt(2.)*sqrt((pow(G,2)*pow(m,2))/
+     (-8. + 36.*pow(dimensional_eps,2) - 27.*pow(dimensional_eps,4) + 
+       dimensional_eps*pow(-8. + 9.*pow(dimensional_eps,2),1.5)));
+    return L_dimensional / sqrt(a*G*M);
   }
   
-  Real L_max( const Real r, const Real eps ) {
-    return c*mp*r*sqrt(-1 + (pow(eps,2)*r)/
-      (pow(c,4)*pow(mp,2)*(-2*G*m + r)));
+  Real Lmax( const Real r, const Real eps ) { 
+    assert( eps >= 0 && eps >= epsmin(r,eps) );
+    assert( eps <= 1 );
+    assert( r > 2.*G*m );
+    assert( -1. + eps/(1. - (2.*G*m)/r) > 0 );
+    // Note: we use dimensionless eps;
+    const Real dimensional_eps = 1.-(G*M/a) * eps;
+    Real dimensional_L = sqrt(-1. + dimensional_eps/(1. - (2.*G*m)/r))*r;
+    return dimensional_L / sqrt(a*G*M);
   }
   
-  Real dimless_eps_max( const Real r, const Real eps ) {
-    return (a*(-1.*eps_min(r,eps) + pow(c,2)*mp))/(G*M*mp);
-  }
-  
-  Real dimless_eps_min( const Real r, const Real eps ) {
-    return (a*(-1.*eps_max(r,eps) + pow(c,2)*mp))/(G*M*mp);
-  }
-  
-  Real dimless_L_max( const Real r, const Real eps ) {
-    return L_min(r,eps)/(sqrt(a*G*M)*mp);
-  }
-  
-  Real dimless_L_min( const Real r, const Real eps ) {
-    return L_min(r,eps)/(sqrt(a*G*M)*mp);
-  }
 
-  
+
   void u_limits( const Real eps, const Real L, Real ulimits[2] ) {
+    //Note: eps, L are dimensionless
+    const Real dimensional_eps = 1.-(G*M/a) * eps;
+    const Real dimensional_L = L*sqrt(a*G*M);
+    // Check ulimits
+    {
+    assert( dimensional_eps < 1 );
+    assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
+    // Better be safe than sorry, see ulimits appendix
+    assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
+          dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
+        (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
+    }
+
     // Solve third order polynomial:
     double results[MAXDEGREE] = {0};
     double results_im[MAXDEGREE] = {0};
@@ -223,23 +235,24 @@ namespace BlackHole {
     // See FourVelocity.nb
     // We first solve limits for u
     // c[0]u^3+...
-    //Changed 20.11.
-    const Real mp= 1; // Mass of the particle
-    const Real c = 1; // Speed of light
-    coeffs[0] = -1.*pow(L,4)*Rs/(pow(eps,2)*pow(mp,2));
+    coeffs[0] = pow(dimensional_L,2)*Rs;
 
-    coeffs[1] = pow(L,4)/(pow(eps*mp,2));
+    coeffs[1] = -1.*pow(dimensional_L,2);
 
-    coeffs[2] = -1.*pow(c,2)*pow(L,2)*Rs/pow(eps,2);
+    coeffs[2] = Rs;
 
-    coeffs[3] = pow(c,2)*pow(L,2)/pow(eps,2)-pow(L,2)/(pow(c,2)*pow(mp,2));
+    coeffs[3] = -1.+pow(dimensional_eps,2);
     
     // Solve:
     rpoly_ak1(coeffs, &degree, results, results_im);
+    // Sort
+    sort(results, results+3);
     // Check results:
     for( int  i = 0; i < 3; ++i ) { 
+      assert( results_im[i] == 0 );
       if( results_im[i] != 0) { ulimits[0]=ERROR; ulimits[1]=ERROR; return;} 
     }
+    assert( results[0] <= 0 );
     if( results[0] <= 0 ) { ulimits[0]=ERROR; ulimits[1]=ERROR; cout << "bad data" << endl; return;}
     if( results[0] > results[1]){ ulimits[0]=ERROR; ulimits[1]=ERROR; cout << "errordata" << endl; return; }
     ulimits[0] = results[0];
@@ -249,32 +262,56 @@ namespace BlackHole {
   }
   
   Real integrand_function( Real u, void * params ){
+    assert( u > 0 );
     // Get parameters
     const double * parameters;
     parameters = (double*) params;
+    // Dimensionless!
     const Real eps = parameters[0];
     const Real L = parameters[1];
+    // Dimensional! with mp=1, c=1
+    const Real dimensional_eps = 1.-(G*M/a) * eps;
+    const Real dimensional_L = L*sqrt(a*G*M);
+    {
+    // Check ulimits
+    assert( dimensional_eps < 1 );
+    assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
+    // Better be safe than sorry, see ulimits appendix
+    assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
+          dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
+        (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
+    }
     
     // See Schwarzschild.nb
-    const Real sqrtParameter =pow(c,2)*(-1 + Rs*u) + 
-   (pow(eps,2) + pow(c,2)*pow(L,2)*pow(u,2)*
-       (-1 + Rs*u))/(pow(c,2)*pow(mp,2));
-    if( sqrtParameter < 0 ) { cerr << "Bad sqrtParameter" << endl; return 0; }
-    const Real fourVelocity = -1.0*sqrt(sqrtParameter);
-    const Real integrand = -1.0*fourVelocity / pow(u,2);
-    
+    const Real sqrtParameter = pow(dimensional_eps,2) - (1 - Rs*u)*(1 + pow(dimensional_L,2)*pow(u,2));
+    assert( sqrtParameter >= 0 );
+    const Real fourVelocity = sqrt(sqrtParameter);
+    // Note: There are two minus signs which cancel each other due to: change of integration limtis u2, u1 to u1, u2 and dr/du
+    const Real integrand = fourVelocity / pow(u,2);
     assert( integrand >= 0 );
     
     //TODO: Check the division!
-    return integrand/(1.0-Rs*u);
+    return integrand;
   }
   
-  Real II_radial( const Real eps, const Real LL ) {
-    // Note: eps = relativistic energy per particle 0<eps<1
-    // And: LL = Relativistic angular momentum per unit mass (larger than 2 Rs)
-    assert( 0<eps && eps<1 );
+  Real II_radial( const Real eps, const Real L ) {
+    // Check input
+    {
+      const Real dimensional_eps = 1.-(G*M/a) * eps;
+      const Real dimensional_L = L*sqrt(a*G*M);
+      assert( dimensional_eps < 1 );
+      assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
+      // Better be safe than sorry, see ulimits appendix
+      assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
+            dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
+          (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
+    }
+
+    // Note: eps, L are dimensionless variables
+    
     Real ulimits[2]={ERROR};
-    u_limits(eps, LL, ulimits); // Get limits
+    u_limits(eps, L, ulimits); // Get limits
+    assert( !check(ulimits[0]) );
     if( !check(ulimits[0]) ) return ERROR; // Check for bad results
     
     Real integral = 0;
@@ -292,7 +329,7 @@ namespace BlackHole {
      
       gsl_function integrand;
      
-      double parameters[2] = {eps, LL};
+      double parameters[2] = {eps, L};
       integrand.function = &integrand_function;
       integrand.params   = &parameters[0];
      
@@ -307,14 +344,14 @@ namespace BlackHole {
       integral = result;
     }
     // Write output
-    output << eps << " " << LL << " " << ulimits[0] << " " << ulimits[1] << " " << integral << endl;
+    output << eps << " " << L << " " << ulimits[0] << " " << ulimits[1] << " " << integral << endl;
     return integral;
   }
 }
 
 inline
-Real f_H( const double dimless_eps ) {
-  const double result =   sqrt(dimless_eps)/pow(1-dimless_eps,2)*
+Real f_H( const Real dimless_eps ) {
+  const Real result =   sqrt(dimless_eps)/pow(1-dimless_eps,2)*
   ((1.-2.*dimless_eps)*(8*dimless_eps*dimless_eps-8*dimless_eps-3.)+3.*asin(sqrt(dimless_eps))/sqrt(dimless_eps*(1-dimless_eps)))
 ;
   assert( result >= 0 );
@@ -413,20 +450,18 @@ Real rho(const Real r, const int N) {
       const Real z = dis(gen);
       assert( z != 0 && u != 0 && z != 1 && u != 1 );
       
-      const Real eepsmax = BlackHole::dimless_eps_max(r, 0);
-      const Real eepsmin = BlackHole::dimless_eps_min(r, 0);
+      const Real epsmax = BlackHole::epsmax(r, 0);
+      const Real epsmin = BlackHole::epsmin(r, 0);
       // Note: eps is now in the dimensions of Joules (energy) and it is not dimensionless
-      assert( BlackHole::eps_min(r,0) < 0 );
-      assert( BlackHole::eps_max(r,0) < 0 );
-      const Real eps = BlackHole::eps_min(r,0)+u*(BlackHole::eps_max(r,0)-BlackHole::eps_min(r,0));
-      const Real LLmax = BlackHole::dimless_L_max(r, eps);
-      const Real LLmin = BlackHole::dimless_L_min(r, eps);
-      // Note: L is now in the right dimensions too!
-      const Real L = sqrt(z*pow(LLmax,2)+(1-z)*pow(LLmin,2))*sqrt(a*G*M)*mp;
+      assert( BlackHole::epsmin(r,0) < 0 );
+      assert( BlackHole::epsmax(r,0) < 0 );
+      const Real Lmax = BlackHole::dimless_L_max(r, eps);
+      const Real Lmin = BlackHole::dimless_L_min(r, eps);
 
-      integral += (1.0-(G*M/pow(c,2) / a)*eepsmax*u)
-                * sqrt((pow(LLmax,2)-pow(LLmin,2))/(1-z))
-                * f_H(transform_energy(u,z));
+      //TODO: the Lmax and Lmin are wrong here
+      //integral += (1.0-(G*M/pow(c,2) / a)*eepsmax*u)
+      //          * sqrt((pow(LLmax,2)-pow(LLmin,2))/(1-z))
+      //          * f_H(transform_energy(u,z));
     }
   }
   return 1./(sqrt(2)*pow(2*pi,2))*(M/pow(a,3)) * (a*BlackHole::dimless_eps_max(r, 0)/(r-2*G*m/pow(c,2)))
@@ -435,24 +470,43 @@ Real rho(const Real r, const int N) {
 }
 
 namespace tests {
+  namespace schwarzschild {
+    template <typename T> int sgn(T val) {
+      return (T(0) < val) - (val < T(0));
+    }
+    
+    void check_u_limits( const Real eps, const Real L ) {
+      // This is a function to check when the 4-velocity square root parameter is non-zero;
+      // The u roots we use only apply when the following is true
+      assert( eps <= mp*pow(c,2) && mp*pow(c,2)<=3.*eps/(2.*sqrt(2.)) );
+      assert( abs(L) <= (pow(abs(Rs),2)*(9*(3*pow(eps,3) - 
+          4*pow(c,4)*eps*pow(mp,2))*abs(eps) + 
+       8*pow(c,8)*pow(mp,4)*sgn(eps) + 
+       eps*sqrt(pow(9*pow(eps,2) - 
+           8*pow(c,4)*pow(mp,2),3))*
+        sgn(pow(eps,2) - pow(c,4)*pow(mp,2))))/
+   (4.*pow(abs(c),2)*(2*eps*abs(eps) - 
+       2*pow(c,4)*pow(mp,2)*sgn(eps))) );
+    }
+  }
 
   void record_black_hole_function( const Real r ) {
     ofstream file;
     file.open("./checks/black_hole_radial.check");
     assert( r>0 && r>2*G*m );
-    const Real epsmin = BlackHole::eps_min(r, 0);
-    const Real epsmax = BlackHole::eps_max(r, 0);
+    const Real epsmin = BlackHole::epsmin(r, 0);
+    const Real epsmax = BlackHole::epsmax(r, 0);
     const int N = 1000;
     for( int i = 0; i < N; ++i ) for( int j = 0; j < N; ++j ) {
       const Real eps = epsmin + (epsmax-epsmin)*i/(Real)(N+1);
-      const Real Lmin = BlackHole::L_max(r,eps);
-      const Real Lmax = BlackHole::L_max(r,eps);
+      const Real Lmin = BlackHole::Lmax(r,eps);
+      const Real Lmax = BlackHole::Lmax(r,eps);
       const Real L = Lmin + (Lmax-Lmin)*j/(Real)(N+1);
       const Real I_bh = BlackHole::II_radial(eps, L);
+      schwarzschild::check_u_limits(eps,L);
       assert( eps > 0 && L > 0 );
       assert( Lmin <= L && L <= Lmax );
       assert( epsmin <= eps && eps <= epsmax );
-      
       // Record values
       file << eps << " " << L << " " << I_bh << endl;
     }
@@ -460,10 +514,20 @@ namespace tests {
     return;
   }
   
-  void tests() {
+  void test_limits( const Real r ) {
+    const Real epsmin = BlackHole::eps_min(r, 0);
+    const Real epsmax = BlackHole::eps_max(r, 0);
+    for( int i = 0; i < 10000; ++i ) for( int j = 0; j < 10000; ++j ) {
+      
+    }
+    return;
+  }
+  
+  void tests( const Real r ) {
     // Function for functions
     //Plot radial action
-    
+    test_limits(r);
+    record_black_hole_function(r);
   }
 }
 
