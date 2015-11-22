@@ -537,12 +537,7 @@ int main(int argc, char **argv) {
     cout << "Test:" << endl;
     cout << "Newtonian: Should be 0.154553 (last output)" << endl;
     cout << Hernquist::II_radial(-2.1e-10,7.77632e-8) << endl;
-    cout << "Black hole tests.." << endl;
-     cout << __LINE__ << endl;
-    cout << 16*G*m/pow(c,2) << endl;
-    const Real r = 16*G*m/pow(c,2);
-    tests::record_black_hole_function(r);
-     cout << __LINE__ << endl;
+    tests::tests();
     cout << "Tests done" << endl;
   } else {
   
