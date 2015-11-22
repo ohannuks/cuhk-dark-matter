@@ -237,7 +237,6 @@ namespace BlackHole {
     assert( eps >= 0 && eps >= epsmin(r,eps) );
     assert( eps <= epsmax(r,eps) );
     assert( r > 2.*G*m );
-    assert( -1. + eps/(1. - (2.*G*m)/r) > 0 );
     // Note: we use dimensionless eps;
     const Real dimensional_eps = 1.-(G*M/a) * eps;
     Real dimensional_L = sqrt(-1. + dimensional_eps/(1. - (2.*G*m)/r))*r;
@@ -437,6 +436,9 @@ Real transform_energy( const Real eps, const Real L ) {
     assert( dimensional_eps < 1 );
     assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
     // Better be safe than sorry, see ulimits appendix
+    cout << (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
+          dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
+        (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) << " " << abs(dimensional_L << endl;
     assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
           dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
         (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
@@ -582,7 +584,7 @@ namespace tests {
     
     for( int i = 0; i < N; ++i ) for( int j = 0; j < N; ++j ) {
       const Real eps = epsmin + (epsmax-epsmin)*i/(Real)(N+1);
-      const Real Lmin = BlackHole::Lmax(r,eps);
+      const Real Lmin = BlackHole::Lmin(r,eps);
       const Real Lmax = BlackHole::Lmax(r,eps);
       const Real L = Lmin + (Lmax-Lmin)*j/(Real)(N+1);
       const Real I_bh = BlackHole::II_radial(eps, L);
