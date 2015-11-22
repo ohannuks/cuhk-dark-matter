@@ -1,9 +1,27 @@
 <?xml version="1.0"?>
 <todo version="0.1.20">
-    <note priority="medium" time="1448067696">
+    <note priority="medium" time="1448067696" done="1448099877">
         Input the rho form
     </note>
-    <note priority="medium" time="1448067703">
+    <note priority="medium" time="1448067703" done="1448099879">
         Input the bracketing algorithm
+    </note>
+    <note priority="medium" time="1448095587">
+        Fix eps_min eps_max
+    </note>
+    <note priority="medium" time="1448099640">
+        Fix radial action o f Black hole. There is somethingg wrong. Either the limits are wrong or the definition for radial action is wrong.
+    </note>
+    <note priority="medium" time="1448099818">
+        Design a few tests: plot allowed values of E, L, r for both radial actions
+    </note>
+    <note priority="medium" time="1448099834">
+        Compare the plotted values with the Sadeghian article
+    </note>
+    <note priority="low" time="1448099870">
+        If nothing else works, redo the limits of E and L, dont redo the whole work..
+    </note>
+    <note priority="verylow" time="1448070827">
+        Check the rho form
     </note>
 </todo>
