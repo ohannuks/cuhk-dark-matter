@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     25743,        698]
-NotebookOptionsPosition[     24283,        646]
-NotebookOutlinePosition[     24617,        661]
-CellTagsIndexPosition[     24574,        658]
+NotebookDataLength[     29537,        816]
+NotebookOptionsPosition[     27839,        757]
+NotebookOutlinePosition[     28173,        772]
+CellTagsIndexPosition[     28130,        769]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -617,6 +617,8 @@ Cell[BoxData[
  CellChangeTimes->{3.65716841184971*^9}]
 }, Open  ]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[{"\"\<Derivation of the limits for eps\>\"", \
 "\[IndentingNewLine]", 
  RowBox[{
@@ -640,9 +642,118 @@ Cell[BoxData[{"\"\<Derivation of the limits for eps\>\"", \
      RowBox[{"M", ">", "0"}], "&&", 
      RowBox[{"a", ">", "0"}], "&&", 
      RowBox[{"r", ">", "0"}], "&&", 
-     RowBox[{"\[Epsilon]", ">", "0"}]}], ",", "r", ",", "Reals"}], "]"}], "//",
-   "FullSimplify"}]}], "Input",
- CellChangeTimes->{{3.65716940553588*^9, 3.657169412860815*^9}}]
+     RowBox[{"\[Epsilon]", ">", "0"}]}], ",", "\[Epsilon]", ",", "Reals"}], 
+   "]"}], "//", 
+  "FullSimplify"}], "\[IndentingNewLine]", "\"\<Now we use the (one line \
+above) result to derive:\>\"", "\[IndentingNewLine]", 
+ RowBox[{"Limit", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["a", "2"], " ", 
+       SuperscriptBox["L", "2"]}], 
+      SuperscriptBox["r", "2"]]}], "+", 
+    FractionBox[
+     RowBox[{"2", " ", "a"}], 
+     RowBox[{"a", "+", "r"}]]}], ",", 
+   RowBox[{"r", "\[Rule]", "\[Infinity]"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Limit", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["a", "2"], " ", 
+        SuperscriptBox["L", "2"]}], 
+       SuperscriptBox["r", "2"]]}], "+", 
+     FractionBox[
+      RowBox[{"2", " ", "a"}], 
+      RowBox[{"a", "+", "r"}]]}], ",", 
+    RowBox[{"r", "\[Rule]", 
+     RowBox[{"4", "G", " ", "m"}]}]}], "]"}], "//", 
+  "FullSimplify"}]}], "Input",
+ CellChangeTimes->{{3.65716940553588*^9, 3.657169412860815*^9}, {
+  3.6571727913100033`*^9, 3.657172792625455*^9}, {3.657172823765794*^9, 
+  3.6571728328026247`*^9}, {3.657173273420773*^9, 3.6571733220344133`*^9}, {
+  3.657173356230089*^9, 3.65717336805337*^9}, {3.657173483247342*^9, 
+  3.657173484234252*^9}, {3.6571736317943583`*^9, 3.657173665985681*^9}}],
+
+Cell[BoxData["\<\"Derivation of the limits for eps\"\>"], "Output",
+ CellChangeTimes->{
+  3.6571728341120987`*^9, {3.657173323681809*^9, 3.657173368459777*^9}, 
+   3.657173484523788*^9, {3.657173648566949*^9, 3.65717366653899*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"r", ">", "0"}], "&&", 
+  RowBox[{"a", ">", "0"}], "&&", 
+  RowBox[{
+   RowBox[{"L", "+", 
+    FractionBox[
+     RowBox[{
+      SqrtBox["2"], " ", "r"}], 
+     SqrtBox[
+      RowBox[{"a", " ", 
+       RowBox[{"(", 
+        RowBox[{"a", "+", "r"}], ")"}]}]]]}], ">", "0"}], "&&", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     SqrtBox["2"], " ", "r"}], 
+    SqrtBox[
+     RowBox[{"a", " ", 
+      RowBox[{"(", 
+       RowBox[{"a", "+", "r"}], ")"}]}]]], ">", "L"}], "&&", 
+  RowBox[{"M", ">", "0"}], "&&", 
+  RowBox[{"G", ">", "0"}], "&&", 
+  RowBox[{"\[Epsilon]", ">", "0"}], "&&", 
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      SuperscriptBox["a", "2"], " ", 
+      SuperscriptBox["L", "2"]}], 
+     SuperscriptBox["r", "2"]], "+", 
+    RowBox[{"2", " ", "\[Epsilon]"}]}], "<", 
+   FractionBox[
+    RowBox[{"2", " ", "a"}], 
+    RowBox[{"a", "+", "r"}]]}]}]], "Output",
+ CellChangeTimes->{
+  3.6571728341120987`*^9, {3.657173323681809*^9, 3.657173368459777*^9}, 
+   3.657173484523788*^9, {3.657173648566949*^9, 3.6571736665405693`*^9}}],
+
+Cell[BoxData["\<\"Now we use the (one line above) result to derive:\"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.6571728341120987`*^9, {3.657173323681809*^9, 3.657173368459777*^9}, 
+   3.657173484523788*^9, {3.657173648566949*^9, 3.657173666541996*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{
+  3.6571728341120987`*^9, {3.657173323681809*^9, 3.657173368459777*^9}, 
+   3.657173484523788*^9, {3.657173648566949*^9, 3.65717366654321*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox[
+    RowBox[{
+     SuperscriptBox["a", "2"], " ", 
+     SuperscriptBox["L", "2"]}], 
+    RowBox[{"16", " ", 
+     SuperscriptBox["G", "2"], " ", 
+     SuperscriptBox["m", "2"]}]]}], "+", 
+  FractionBox[
+   RowBox[{"2", " ", "a"}], 
+   RowBox[{"a", "+", 
+    RowBox[{"4", " ", "G", " ", "m"}]}]]}]], "Output",
+ CellChangeTimes->{
+  3.6571728341120987`*^9, {3.657173323681809*^9, 3.657173368459777*^9}, 
+   3.657173484523788*^9, {3.657173648566949*^9, 3.657173666645708*^9}}]
+}, Open  ]]
 },
 WindowSize->{681, 688},
 WindowMargins->{{Automatic, 0}, {Automatic, 0}},
@@ -699,7 +810,14 @@ Cell[18834, 485, 958, 25, 118, "Input"],
 Cell[19795, 512, 101, 1, 32, "Output"],
 Cell[19899, 515, 3475, 101, 296, "Output"]
 }, Open  ]],
-Cell[23389, 619, 890, 25, 118, "Input"]
+Cell[CellGroupData[{
+Cell[23411, 621, 2111, 60, 246, "Input"],
+Cell[25525, 683, 231, 3, 32, "Output"],
+Cell[25759, 688, 1084, 37, 106, "Output"],
+Cell[26846, 727, 251, 4, 32, "Output"],
+Cell[27100, 733, 192, 3, 32, "Output"],
+Cell[27295, 738, 528, 16, 54, "Output"]
+}, Open  ]]
 }
 ]
 *)

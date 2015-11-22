@@ -25,6 +25,9 @@ const bool check( const Real ERROR ) {
   return true;
 }
 
+// For numerical error
+const Real disp = 1.0e-38;
+
 //Constants
 // c=1
 const Real a = 20000; // pc
@@ -52,12 +55,17 @@ namespace Hernquist {
 
   //Solves limits of the equation
   void R_limits( const Real eps, const Real L, Real Rlimits[3] ) {
+    // Make sure the initial value is error value
+    Rlimits[0] = ERROR;
+    Rlimits[1] = ERROR;
+    Rlimits[2] = ERROR;
+    assert( !check(Rlimits[0]));
     // Check the input values
     {
-      assert( eps > 0 );
-      assert( abs(L) > 0 );
-      assert( -20. + 1./eps - 8.*eps + pow(1. + 8.*eps,1.5)/eps >= 0 );
-      assert( abs(L) < sqrt(-20. + 1./eps - 8.*eps + pow(1. + 8.*eps,1.5)/eps)/2. );
+      if( !(eps > 0) ) return;
+      if( !(abs(L) > 0) ) return;
+      if( !(-20. + 1./eps - 8.*eps + pow(1. + 8.*eps,1.5)/eps >= 0) ) return;
+      if( !(abs(L) < sqrt(-20. + 1./eps - 8.*eps + pow(1. + 8.*eps,1.5)/eps)/2.) ) return;
     }
     // eps = dimensionless newtonian energy
     // L = dimensionless angular momentum
@@ -130,6 +138,9 @@ namespace Hernquist {
     return integrand;
   }
 
+  // Calculates the action integral for the Newtonian case
+  // Of special note; if the eps and L values are bad, returns 0 instead of breaking the code. This is because this is called in an energy bracketing algorithm, and it is
+  // unclear what the energy limits should be, as they depend on r.
   Real II_radial( const Real eps, const Real newtonian_dimensionless_L ) {
     // Note: eps = dimensionless hernquist energy per unit mass
     // And: L = dimensionless angular momentum per unit mass
@@ -137,6 +148,8 @@ namespace Hernquist {
     Real Rlimits[3]={ERROR};
     R_limits(eps, newtonian_dimensionless_L, Rlimits); // Get limits
 
+    if( !check(Rlimits[0]) ) return 0; // Dont let bad values affect the integral :)
+    
     assert( check(Rlimits[0]) );
 
     Real integral = 0;
@@ -413,6 +426,8 @@ Real solve_radial_action( Real hernquist_eps, void * params ) {
 
 
 Real transform_energy( const Real eps, const Real L ) {
+  // Note: transforms the energy from E relativistic basis to correspondingn newtonian basis (equates radial action integrals)
+  // NNote: eps, L are dimensionless.
   // Check input
   {
     const Real dimensional_eps = 1.-(G*M/a) * eps;
@@ -428,8 +443,6 @@ Real transform_energy( const Real eps, const Real L ) {
   //This transforms the energy from relativistic basis to newtonian basis by equating the radial action integrals
   Real I_bh = BlackHole::II_radial(eps, L);
   assert(check( I_bh ));
-  // Find the new energy
-  Real E_dimensionless_newtonian = ERROR;
   
   Real root;
   // Find root:
@@ -450,9 +463,13 @@ Real transform_energy( const Real eps, const Real L ) {
   //save_function_output(limits, E, L); return 0;
   //solve_limits( limits, L, r );
   Real limits[2] = {ERROR};
+  // TODO: These are just incorrect; they rely on hernquist radial action giving 0 when bad values are inputted
   // Limits are from 
-  //limits[0] = -1*G*M/a*(1-1e-7);
-  //limits[1] = -1*G*M/a*1e-7;
+  limits[0] = 0;
+  limits[1] = 1./2.;
+  // Small displacement ( limit eps>0, not eps>=0
+  limits[0] += disp;
+  limits[1] -= disp;
   assert( check(limits[0]) );
   gsl_root_fsolver_set(solver, &function, limits[0], limits[1]);
 
@@ -598,9 +615,7 @@ namespace tests {
 int main(int argc, char **argv) {
   if( argc>1 && strcmp(argv[0], "test") ) {
     //Tests
-    cout << "Test:" << endl;
-    cout << "Newtonian: Should be 0.154553 (last output)" << endl;
-    cout << Hernquist::II_radial(-2.1e-10,7.77632e-8) << endl;
+    cout << "Testing.." << endl;
     tests::tests();
     cout << "Tests done" << endl;
   } else {
