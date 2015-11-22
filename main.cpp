@@ -515,17 +515,16 @@ namespace tests {
   }
   
   void test_limits( const Real r ) {
-    const Real epsmin = BlackHole::eps_min(r, 0);
-    const Real epsmax = BlackHole::eps_max(r, 0);
     for( int i = 0; i < 10000; ++i ) for( int j = 0; j < 10000; ++j ) {
       
     }
     return;
   }
   
-  void tests( const Real r ) {
+  void tests() {
     // Function for functions
     //Plot radial action
+    const Real r = 16 * G * m;
     test_limits(r);
     record_black_hole_function(r);
   }
