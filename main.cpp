@@ -448,25 +448,33 @@ Real rho(const Real r, const int N) {
     for( int z_i = 0; z_i < N; ++z_i ) {
       const Real u = dis(gen);
       const Real z = dis(gen);
-      assert( z != 0 && u != 0 && z != 1 && u != 1 );
-      
+      assert( 0<u && u<1 );
+      assert( 0<z && z<1 );
+ 
+
+      // Note: eps, L are now dimensionless as in the Sadeghian article
       const Real epsmax = BlackHole::epsmax(r, 0);
       const Real epsmin = BlackHole::epsmin(r, 0);
-      // Note: eps is now in the dimensions of Joules (energy) and it is not dimensionless
-      assert( BlackHole::epsmin(r,0) < 0 );
-      assert( BlackHole::epsmax(r,0) < 0 );
-      const Real Lmax = BlackHole::dimless_L_max(r, eps);
-      const Real Lmin = BlackHole::dimless_L_min(r, eps);
+      assert( epsmin == 0); // Not 100% sure if this is correct
+      const Real eps = epsmin + u*epsmax;
+      const Real Lmax = BlackHole::Lmax(r, eps);
+      const Real Lmin = BlackHole::Lmin(r, eps);
+      const Real L = sqrt( z*pow(Lmax,2)+(1.-z)*pow(Lmin,2) );
+      assert( Lmin < Lmax );
+      assert( epsmin < epsmax );
+      assert( epsmin >= 0 );
+      assert( epsmax <= 1 );
 
-      //TODO: the Lmax and Lmin are wrong here
-      //integral += (1.0-(G*M/pow(c,2) / a)*eepsmax*u)
-      //          * sqrt((pow(LLmax,2)-pow(LLmin,2))/(1-z))
-      //          * f_H(transform_energy(u,z));
+      integral += (1.-(G*M / a)*epsmax*u)
+                * sqrt((pow(Lmax,2)-pow(Lmin,2))/(1.-z))
+                * f_H(transform_energy(u,z));
     }
   }
-  return 1./(sqrt(2)*pow(2*pi,2))*(M/pow(a,3)) * (a*BlackHole::dimless_eps_max(r, 0)/(r-2*G*m/pow(c,2)))
-  * integral;
-  return 0;
+  //TODO: fix the integral here
+  return 1./(sqrt(2.)*pow(2.*pi,2))
+       * M/pow(a,3)
+       * a*BlackHole::epsmax(r, 0) / (r-2.*G*m)
+       * integral;
 }
 
 namespace tests {
@@ -478,15 +486,16 @@ namespace tests {
     void check_u_limits( const Real eps, const Real L ) {
       // This is a function to check when the 4-velocity square root parameter is non-zero;
       // The u roots we use only apply when the following is true
-      assert( eps <= mp*pow(c,2) && mp*pow(c,2)<=3.*eps/(2.*sqrt(2.)) );
-      assert( abs(L) <= (pow(abs(Rs),2)*(9*(3*pow(eps,3) - 
-          4*pow(c,4)*eps*pow(mp,2))*abs(eps) + 
-       8*pow(c,8)*pow(mp,4)*sgn(eps) + 
-       eps*sqrt(pow(9*pow(eps,2) - 
-           8*pow(c,4)*pow(mp,2),3))*
-        sgn(pow(eps,2) - pow(c,4)*pow(mp,2))))/
-   (4.*pow(abs(c),2)*(2*eps*abs(eps) - 
-       2*pow(c,4)*pow(mp,2)*sgn(eps))) );
+      {
+        const Real dimensional_eps = 1.-(G*M/a) * eps;
+        const Real dimensional_L = L*sqrt(a*G*M);
+        assert( dimensional_eps < 1 );
+        assert( 1 < 3.*dimensional_eps/(2.*sqrt(2.)) );
+        // Better be safe than sorry, see ulimits appendix
+        assert( (sqrt((8. - 36.*pow(dimensional_eps,2) + 27.*pow(dimensional_eps,4) - 
+              dimensional_eps*sqrt(pow(-8. + 9.*pow(dimensional_eps,2),3.)))/
+            (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
+      }
     }
   }
 
@@ -494,9 +503,12 @@ namespace tests {
     ofstream file;
     file.open("./checks/black_hole_radial.check");
     assert( r>0 && r>2*G*m );
+    
+    // Note: dimensionless
     const Real epsmin = BlackHole::epsmin(r, 0);
     const Real epsmax = BlackHole::epsmax(r, 0);
     const int N = 1000;
+    
     for( int i = 0; i < N; ++i ) for( int j = 0; j < N; ++j ) {
       const Real eps = epsmin + (epsmax-epsmin)*i/(Real)(N+1);
       const Real Lmin = BlackHole::Lmax(r,eps);
@@ -507,6 +519,7 @@ namespace tests {
       assert( eps > 0 && L > 0 );
       assert( Lmin <= L && L <= Lmax );
       assert( epsmin <= eps && eps <= epsmax );
+      assert( check(I_bh) );
       // Record values
       file << eps << " " << L << " " << I_bh << endl;
     }
