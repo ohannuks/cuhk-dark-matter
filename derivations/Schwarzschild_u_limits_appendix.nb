@@ -1,0 +1,225 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6828,        216]
+NotebookOptionsPosition[      6334,        194]
+NotebookOutlinePosition[      6668,        209]
+CellTagsIndexPosition[      6625,        206]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData["\"\<Here, we simplify the limits given in the \
+u_limits.nb\>\""], "Input",
+ CellChangeTimes->{{3.657158711125841*^9, 3.6571587209341793`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    FractionBox["1", 
+     RowBox[{"2", " ", 
+      RowBox[{"Abs", "[", "c", "]"}]}]]}], 
+   RowBox[{"Abs", "[", "Rs", "]"}], " ", 
+   RowBox[{"\[Sqrt]", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"8", " ", 
+         SuperscriptBox["c", "8"], " ", 
+         RowBox[{"Sign", "[", "\[CapitalEpsilon]", "]"}], " ", 
+         SubsuperscriptBox["m", "p", "4"]}], "+", 
+        RowBox[{"\[CapitalEpsilon]", " ", 
+         RowBox[{"Sign", "[", 
+          RowBox[{
+           SuperscriptBox["\[CapitalEpsilon]", "2"], "-", 
+           RowBox[{
+            SuperscriptBox["c", "4"], " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}], "]"}], " ", 
+         SqrtBox[
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"9", " ", 
+              SuperscriptBox["\[CapitalEpsilon]", "2"]}], "-", 
+             RowBox[{"8", " ", 
+              SuperscriptBox["c", "4"], " ", 
+              SubsuperscriptBox["m", "p", "2"]}]}], ")"}], "3"]]}], "+", 
+        RowBox[{"9", " ", 
+         RowBox[{"Abs", "[", "\[CapitalEpsilon]", "]"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"3", " ", 
+            SuperscriptBox["\[CapitalEpsilon]", "3"]}], "-", 
+           RowBox[{"4", " ", 
+            SuperscriptBox["c", "4"], " ", "\[CapitalEpsilon]", " ", 
+            SubsuperscriptBox["m", "p", "2"]}]}], ")"}]}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"2", " ", "\[CapitalEpsilon]", " ", 
+         RowBox[{"Abs", "[", "\[CapitalEpsilon]", "]"}]}], "-", 
+        RowBox[{"2", " ", 
+         SuperscriptBox["c", "4"], " ", 
+         RowBox[{"Sign", "[", "\[CapitalEpsilon]", "]"}], " ", 
+         SubsuperscriptBox["m", "p", "2"]}]}], ")"}]}], ")"}]}]}], "/.", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["m", "p"], "\[Rule]", "1"}], ",", 
+    RowBox[{"c", "\[Rule]", "1"}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Assuming", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[CapitalEpsilon]", ">", "0"}], "&&", 
+    RowBox[{"Rs", ">", "0"}], "&&", 
+    RowBox[{"0", "<", "\[CapitalEpsilon]", "<", "1"}]}], ",", 
+   RowBox[{"Simplify", "[", "%", "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.657158578832266*^9, 3.6571586309778147`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox["1", "2"]}], " ", 
+  RowBox[{"Abs", "[", "Rs", "]"}], " ", 
+  SqrtBox[
+   FractionBox[
+    RowBox[{
+     RowBox[{"9", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "4"}], " ", "\[CapitalEpsilon]"}], "+", 
+        RowBox[{"3", " ", 
+         SuperscriptBox["\[CapitalEpsilon]", "3"]}]}], ")"}], " ", 
+      RowBox[{"Abs", "[", "\[CapitalEpsilon]", "]"}]}], "+", 
+     RowBox[{"8", " ", 
+      RowBox[{"Sign", "[", "\[CapitalEpsilon]", "]"}]}], "+", 
+     RowBox[{"\[CapitalEpsilon]", " ", 
+      SqrtBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "8"}], "+", 
+          RowBox[{"9", " ", 
+           SuperscriptBox["\[CapitalEpsilon]", "2"]}]}], ")"}], "3"]], " ", 
+      RowBox[{"Sign", "[", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", 
+        SuperscriptBox["\[CapitalEpsilon]", "2"]}], "]"}]}]}], 
+    RowBox[{
+     RowBox[{"2", " ", "\[CapitalEpsilon]", " ", 
+      RowBox[{"Abs", "[", "\[CapitalEpsilon]", "]"}]}], "-", 
+     RowBox[{"2", " ", 
+      RowBox[{"Sign", "[", "\[CapitalEpsilon]", "]"}]}]}]]]}]], "Output",
+ CellChangeTimes->{{3.657158589247414*^9, 3.657158631487145*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  FractionBox[
+   RowBox[{"Rs", " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{"8", "-", 
+       RowBox[{"36", " ", 
+        SuperscriptBox["\[CapitalEpsilon]", "2"]}], "+", 
+       RowBox[{"27", " ", 
+        SuperscriptBox["\[CapitalEpsilon]", "4"]}], "-", 
+       RowBox[{"\[CapitalEpsilon]", " ", 
+        SqrtBox[
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "8"}], "+", 
+            RowBox[{"9", " ", 
+             SuperscriptBox["\[CapitalEpsilon]", "2"]}]}], ")"}], "3"]]}]}], 
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["\[CapitalEpsilon]", "2"]}]]]}], 
+   RowBox[{"2", " ", 
+    SqrtBox["2"]}]]}]], "Output",
+ CellChangeTimes->{{3.657158589247414*^9, 3.6571586315930977`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"Rs", " ", 
+      SqrtBox[
+       FractionBox[
+        RowBox[{"8", "-", 
+         RowBox[{"36", " ", 
+          SuperscriptBox["\[CapitalEpsilon]", "2"]}], "+", 
+         RowBox[{"27", " ", 
+          SuperscriptBox["\[CapitalEpsilon]", "4"]}], "-", 
+         RowBox[{"\[CapitalEpsilon]", " ", 
+          SqrtBox[
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "8"}], "+", 
+              RowBox[{"9", " ", 
+               SuperscriptBox["\[CapitalEpsilon]", "2"]}]}], ")"}], "3"]]}]}], 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", 
+         SuperscriptBox["\[CapitalEpsilon]", "2"]}]]]}], 
+     RowBox[{"2", " ", 
+      SqrtBox["2"]}]]}], "/.", 
+   RowBox[{"\[CapitalEpsilon]", "\[Rule]", "eps"}]}], "//", 
+  "CForm"}]], "Input",
+ CellChangeTimes->{{3.657158646086669*^9, 3.6571586718930387`*^9}}],
+
+Cell["\<\
+-(Sqrt((8 - 36*Power(eps,2) + 27*Power(eps,4) - 
+          eps*Sqrt(Power(-8 + 9*Power(eps,2),3)))/
+        (-1 + Power(eps,2)))*Rs)/(2.*Sqrt(2))\
+\>", "Output",
+ CellChangeTimes->{{3.657158649432003*^9, 3.6571586721309032`*^9}}]
+}, Open  ]]
+},
+WindowSize->{681, 688},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 157, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[740, 26, 2327, 62, 276, "Input"],
+Cell[3070, 90, 1229, 35, 117, "Output"],
+Cell[4302, 127, 795, 24, 97, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5134, 156, 942, 28, 117, "Input"],
+Cell[6079, 186, 239, 5, 82, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

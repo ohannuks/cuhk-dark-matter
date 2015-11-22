@@ -6,6 +6,9 @@
     <note priority="medium" time="1448067703" done="1448099879">
         Input the bracketing algorithm
     </note>
+    <note priority="low" time="1448099870" done="1448167012">
+        If nothing else works, redo the limits of E and L, dont redo the whole work..
+    </note>
     <note priority="medium" time="1448095587">
         Fix eps_min eps_max
     </note>
@@ -18,8 +21,14 @@
     <note priority="medium" time="1448099834">
         Compare the plotted values with the Sadeghian article
     </note>
-    <note priority="low" time="1448099870">
-        If nothing else works, redo the limits of E and L, dont redo the whole work..
+    <note priority="medium" time="1448166998">
+        Add the c into the radial invariant comparison :)
+    </note>
+    <note priority="medium" time="1448167608">
+        Rho is incorrect now, we changed to dimensionless variables again..
+    </note>
+    <note priority="medium" time="1448170109">
+        Implement iterative ulimits test
     </note>
     <note priority="verylow" time="1448070827">
         Check the rho form
