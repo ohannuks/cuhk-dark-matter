@@ -434,12 +434,51 @@ Real rho(const Real r, const int N) {
   return 0;
 }
 
+namespace tests {
+
+  void record_black_hole_function( const Real r ) {
+    ofstream file;
+    file.open("./checks/black_hole_radial.check");
+    assert( r>0 && r>2*G*m );
+    const Real epsmin = BlackHole::eps_min(r, 0);
+    const Real epsmax = BlackHole::eps_max(r, 0);
+    const int N = 1000;
+    for( int i = 0; i < N; ++i ) for( int j = 0; j < N; ++j ) {
+      const Real eps = epsmin + (epsmax-epsmin)*i/(Real)(N+1);
+      const Real Lmin = BlackHole::L_max(r,eps);
+      const Real Lmax = BlackHole::L_max(r,eps);
+      const Real L = Lmin + (Lmax-Lmin)*j/(Real)(N+1);
+      const Real I_bh = BlackHole::II_radial(eps, L);
+      assert( eps > 0 && L > 0 );
+      assert( Lmin <= L && L <= Lmax );
+      assert( epsmin <= eps && eps <= epsmax );
+      
+      // Record values
+      file << eps << " " << L << " " << I_bh << endl;
+    }
+    file.close();
+    return;
+  }
+  
+  void tests() {
+    // Function for functions
+    //Plot radial action
+    
+  }
+}
+
 int main(int argc, char **argv) {
   if( argc>1 && strcmp(argv[0], "test") ) {
     //Tests
     cout << "Test:" << endl;
-    cout << "Newtonian: Should be 0.154553 " << endl;
+    cout << "Newtonian: Should be 0.154553 (last output)" << endl;
     cout << Hernquist::II_radial(-2.1e-10,7.77632e-8) << endl;
+    cout << "Black hole tests.." << endl;
+     cout << __LINE__ << endl;
+    cout << 16*G*m/pow(c,2) << endl;
+    const Real r = 16*G*m/pow(c,2);
+    tests::record_black_hole_function(r);
+     cout << __LINE__ << endl;
     cout << "Tests done" << endl;
   } else {
   
