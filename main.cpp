@@ -209,18 +209,20 @@ namespace BlackHole {
     } else {
       assert( 1==0 );
     }
+    assert( 0 < eps_dimensional && eps_dimensional < 1 );
     return a/(G*M) * (1.-eps_dimensional);
   }
   
   Real epsmin( const Real r, const Real eps ) { 
     assert( r > 2.*G*m );
     // Dimensionless
+    // Comment: a/(G*M) * (1-eps_dimensional) gives the eps
     return 0;
   }
   
   Real Lmin( const Real r, const Real eps ) {
     assert( eps >= 0 && eps >= epsmin(r,eps) );
-    assert( eps <= 1 );
+    assert( eps <= epsmax(r,eps) );
     assert( r > 2.*G*m );
     // Note: we use dimensionless eps;
     const Real dimensional_eps = 1.-(G*M/a) * eps;
@@ -233,7 +235,7 @@ namespace BlackHole {
   
   Real Lmax( const Real r, const Real eps ) { 
     assert( eps >= 0 && eps >= epsmin(r,eps) );
-    assert( eps <= 1 );
+    assert( eps <= epsmax(r,eps) );
     assert( r > 2.*G*m );
     assert( -1. + eps/(1. - (2.*G*m)/r) > 0 );
     // Note: we use dimensionless eps;
