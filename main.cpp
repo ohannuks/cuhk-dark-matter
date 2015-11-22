@@ -534,7 +534,7 @@ Real rho(const Real r, const int N) {
       assert( Lmin < Lmax );
       assert( epsmin < epsmax );
       assert( epsmin >= 0 );
-      assert( epsmax <= 1 );
+      assert( epsmax <= BlackHole::epsmax(r,eps) );
 
       integral += (1.-(G*M / a)*epsmax*u)
                 * sqrt((pow(Lmax,2)-pow(Lmin,2))/(1.-z))
