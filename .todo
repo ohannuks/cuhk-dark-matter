@@ -6,11 +6,26 @@
     <note priority="medium" time="1448067703" done="1448099879">
         Input the bracketing algorithm
     </note>
+    <note priority="medium" time="1448095587" done="1448183474">
+        Fix eps_min eps_max
+    </note>
+    <note priority="medium" time="1448166998" done="1448183507">
+        Add the c into the radial invariant comparison :)
+        <comment>
+            Dimensionless variables
+        </comment>
+    </note>
+    <note priority="medium" time="1448167608" done="1448183525">
+        Rho is incorrect now, we changed to dimensionless variables again..
+    </note>
+    <note priority="medium" time="1448183057" done="1448183601">
+        Constants are currently wrong
+    </note>
+    <note priority="medium" time="1448183543" done="1448183596">
+        Remove all mps and cs
+    </note>
     <note priority="low" time="1448099870" done="1448167012">
         If nothing else works, redo the limits of E and L, dont redo the whole work..
-    </note>
-    <note priority="medium" time="1448095587">
-        Fix eps_min eps_max
     </note>
     <note priority="medium" time="1448099640">
         Fix radial action o f Black hole. There is somethingg wrong. Either the limits are wrong or the definition for radial action is wrong.
@@ -21,14 +36,14 @@
     <note priority="medium" time="1448099834">
         Compare the plotted values with the Sadeghian article
     </note>
-    <note priority="medium" time="1448166998">
-        Add the c into the radial invariant comparison :)
-    </note>
-    <note priority="medium" time="1448167608">
-        Rho is incorrect now, we changed to dimensionless variables again..
-    </note>
     <note priority="medium" time="1448170109">
         Implement iterative ulimits test
+    </note>
+    <note priority="medium" time="1448183486">
+        Add e_min, e_max limits for the newtonian case
+    </note>
+    <note priority="medium" time="1448183678">
+        Set limits for the newtonian radial action according to the Notebook file
     </note>
     <note priority="verylow" time="1448070827">
         Check the rho form
