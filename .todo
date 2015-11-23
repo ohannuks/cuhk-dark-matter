@@ -9,6 +9,12 @@
     <note priority="medium" time="1448095587" done="1448183474">
         Fix eps_min eps_max
     </note>
+    <note priority="medium" time="1448099640" done="1448185728">
+        Fix radial action o f Black hole. There is somethingg wrong. Either the limits are wrong or the definition for radial action is wrong.
+        <comment>
+            c=1
+        </comment>
+    </note>
     <note priority="medium" time="1448166998" done="1448183507">
         Add the c into the radial invariant comparison :)
         <comment>
@@ -51,16 +57,19 @@
             Looks good
         </comment>
     </note>
-    <note priority="medium" time="1448099640" done="1448185728">
-        Fix radial action o f Black hole. There is somethingg wrong. Either the limits are wrong or the definition for radial action is wrong.
-        <comment>
-            c=1
-        </comment>
-    </note>
     <note priority="medium" time="1448099818">
         Design a few tests: plot allowed values of E, L, r for both radial actions
     </note>
     <note priority="medium" time="1448099834">
         Compare the plotted values with the Sadeghian article
+    </note>
+    <note priority="medium" time="1448190387">
+        Check the tests; there is something wrong with u_limits. The assert check says the u limits cannot be found in the full range of E and L
+    </note>
+    <note priority="medium" time="1448192023">
+        Contradiction; the L_max, L_min, eps_max, eps_min seem to be in contradiction with the 4-velocity integration (that is, the 4-velocity is imaginary for some values of eps, L within the limits)
+    </note>
+    <note priority="medium" time="1448245564">
+        Check the E and L limits; there could be something funny going on with the angular momentum limits from the u_limits derivation file. It says the angular momentum has an upper bound and lower bound  between &lt;0 and &gt;0, while I think the bounds should be larger than zero at all times
     </note>
 </todo>
