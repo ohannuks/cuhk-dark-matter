@@ -509,9 +509,10 @@ Real rho(const Real r, const int N) {
   const Real dz = 1./(double)(N);
 
   // Calculate integral:
-//#pragma omp parallel for schedule(dynamic) reduction(+:integral)
+// Note: trivial parallelization
+//#pragma omp parallel for schedule(static, 1) reduction(+:integral)
   random_device rd;
-  mt19937 gen(rd());
+  mt19937 gen(rd()); // C++11 standard random number distribution; should be based on Mersenne Twister
   uniform_real_distribution<> dis(0+1.0e-5,1-1.0e-5);
   for( int u_i = 0; u_i < N; ++u_i ) {
     for( int z_i = 0; z_i < N; ++z_i ) {
