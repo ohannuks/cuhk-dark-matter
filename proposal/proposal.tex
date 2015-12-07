@@ -9,23 +9,39 @@
 
 \maketitle
 
-% A few notes:
-% How is it done today, and what are the limits of current practice?
+% General note: The current aim is to focus on content. I'll fix the scattered paragraphs and chaotic writing style later
+
+% A few generic notes to keep in mind (copied from the wide web):
+% • How is it done today, and what are the limits of current practice?
 % • What's new in your approach and why do you think it will be
 % successful?
 % • Who cares?
 % • If you're successsful, what difference will it make?
 % • What are the risks and the payoffs?
-% • How much will it cost?
+% • How much will it cost? (computational resources)
 % • How long will it take?
 % • What are the midterm and final "exams" to check for success?
-
-% Questions:
-%  How realistic is a merger event? Would we be able to detect anything?
-%   if during merging -> annihilation not settled, but eventually 
-%   should settle
+% • What makes you suitable to conduct the research?
 
 
+% Some questions to address (see also the following paragraph):
+% • How realistic is a merger event and a step mass growth? Would we be able to detect anything?
+% • What would be the consequences? Would it address e.g. the problem of dark matter annihilation reaching a stable state?
+% • What kind of local consequences do DM distributions have from a general astrophysics view? E.g. in Sadeghian's article the point of interest was mostly consequences to local DM distributions (and whether they would cause smaller order perturbations to star orbits)
+
+% From discussion with MC:
+% • Merger event: Try to establish some analysis of time scales from e.g. Binney and Tremaine's book and previous research (there was discussion on orbit times, dynamical timescales etc in one of Francesc' presentations)
+% • Detection efforts: This should be framed as one of the central points of the proposal; for now we should not be able to give sensible estimates on detectability without going through with the research. The previous research by Gondolo and Silk on neutrino and gamma-ray detection efforts could be cited, but not used for predicting outcomes.
+% • Let's not focus on observations too much (e.g. Fermi-LAT and IceCube data). It can be considered to be out of the scope of this proposal. Some well-established methods for calculating e,g, neutrino fluxes can be directly applied from e.g. some of Silk's papers. 
+% • GYOTO can be used for ray-tracing, so it should be a natural tool to apply when it comes to analyzing data and observability.
+% • For consequences; it should suffice to dig up a few papers on adiabatic vs non-adiabatic growth (even in Newtonian treatment) and to argue whether non-adiabatic growth would a) enhance (or de-enhance) a dark matter spike near black holes and  b) That dark matter annihilation flux should be greater because annihilation cannot reach a stable state
+% • For local consequences; since we have not looked very much into this it suffices to mention that e.g. perturbations from dark matter distributions could affect star orbits (a central point in Sadeghian's thesis). Also a natural extension in the GYOTO framework. In this proposal we avoid discussing other local effects e.g. AGN physics, unless framed in a very general way.
+
+% Smaller Notes:
+% • Some criticism on DM spikes in the first place: "Dark-matter spike at the galactic center? 2002"
+% • Another big motivation for this proposal: since a large part of indirect dark matter searches come from the research on DM spikes and there are many smaller areas that "branch off" from the spike results, it should be investigated thoroughly
+% • For some observational motivation, it might suffice to say something along these lines (copypasted..) "The flux of neutrinos from neutralino annihilation in this spike exceeds current experimental upper bounds in some regions of neutralino parameter space. Subsequent work shows @12,13# that synchrotron emission from the motion of electrons and positrons produced by neutralino annihilation in this spike would also be significant and may exceed current upper bounds. The conclusion of Ref. @12# is that either neutralino dark matter or a cuspy halo must be ruled out. Bertone, Sigl and Silk @13#, introducing a different estimate ofsynchrotron self-absorption, find much weaker, but still significant, limits on the neutralino parameters space. Given these very important implications for dark-matter searches, the claim of the possible presence of a steep dark-matter spike at the galactic center and the underlying assumptions should be investigated more carefully. Here we argue that although a possibility, the enhancement found by GS requires somewhat unusual initial conditions for the galactic halo and for the black hole. In particular, we emphasize how crucial it is that the black hole grew adiabatically from a tiny initial mass to its present-day mass, and that this happened precisely at the center of the dark-matter distribution."
+% See PHYSICAL REVIEW D 64 043504 Fig 1; not very good news. Using a toy-model of circular DM circular orbits it was shown that a quick growth de-enhances orbits. On the other hand, this also creates a possibility for non-stable DM annihilation.
 
 \begin{abstract}
 
@@ -36,6 +52,7 @@
 % Comments: should be separated into Introduction and Review of Previous Research
 % - Needs to have more things about detection efforts and fruits of research, more motivation
 
+% Note: Since we claim to investigate local dynamics, we could mention a few words on the prospects in the following sections. Or drop the sentence 
 We propose to investigate dark matter distributions near black holes 
 massive blacpickingk holes using GYOTO software to ray-trace dark matter 
 particles in a realistic, dynamic astrophysical setting with a 
@@ -72,7 +89,7 @@ We propose to extend the previous research to realistic astrophysical
 settings such as quick growth of a black hole due to a merging event by 
 relaxing the assumption of adiabatic growth and without assuming a 
 Maxwell-Juttner distribution. 
-%
+% The following is a paragraph I removed because I feel it is not justified:
 %We hope a faster growth event would 
 %among others give more stringent limits on dark matter annihilation, 
 %as during a fast black hole growth dark matter would not be able to 
@@ -83,14 +100,46 @@ Maxwell-Juttner distribution.
 \section{Review of Previous Research}
 
 % Note: Get to the point immediately
-Dark matter is an active research area in cosmology, astrophysics as well as particle physics.
+Dark matter is an active research area in cosmology, astrophysics as well as particle physics. It is believed to make up about 85\% of the matter content in the universe. The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, both on small and large scales \citep{this_probably_doesnt_need_a_citation}. In 1999 Gondolo and Silk proposed that dark matter could be detected indirectly by a self-annihilation signal from galactic centres \citep{GS_1999_original}. % Note: Re-read the BSW article thoroughly
+
+The article by Gondolo and Silk proposed a mechanism in which dark matter density could produce a highly dense spike near the centres of galaxies as a consequence of adiabatic growth. The model was analytical, and relied heavily on simplifying assumptions, such as the black hole residing exactly at the centre of the galaxy throughout the adiabatic (slow) growth, and there being no merger events. % Clarify and structure this paragraph a bit later
+
+
+
 
 \section{Proposed Research}
 
+% Overview
+% Points to note: Risk analysis should be included here. The proposed research should be focused but at the same time should demonstrate that we are not only relying on a single miracle happening and we can explore other areas.
+
+\subsection{Methods}
+
+% GYOTO ray-tracer
+% Analytic calculations; Kerr black hole; kinetic physics
+% Phase-space sampling
+% A few relevant equations with explanations
+% For the future: Local consequences? A few words should suffice and should still be within the scope of this proposal
+
+\subsection{Data analysis}
+
+% Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_2009} and Schnittman's paper.
+% Note: GYOTO offers ray-tracing and constructing images so obviously it should be used here
+
+\subsection{Results}
+
+% Bad title; add something about expected results and what we want to do with the data we're getting
+
+
 \section{Summary}
 
-\section{Budget}
+% Self-explanatory
 
+\section{Resources}
 
+% Self-explanatory; explain the computational resources we can request and pursue
+
+\section{Schedule}
+
+% This might be a bit hard to estimate but say a few words about our schedule.
 
 \end{document}
