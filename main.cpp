@@ -567,6 +567,17 @@ namespace tests {
             (-1. + pow(dimensional_eps,2)))*Rs)/(2.*sqrt(2.)) > abs(dimensional_L) );
       }
     }
+
+    // TODO
+    // Check if:
+    // For given r, L there exist bound orbits
+    // Find r-, r+
+    // E_max = Potential(r-)
+    // E_min<E<E_max
+    void check_effective_potential_limits( const Real eps, const Real L, const Real r ) {
+       Real E_max, E_min;
+       
+    }
   }
 
   void record_black_hole_function( const Real r ) {
