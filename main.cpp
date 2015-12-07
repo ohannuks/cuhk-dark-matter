@@ -573,10 +573,31 @@ namespace tests {
     // For given r, L there exist bound orbits
     // Find r-, r+
     // E_max = Potential(r-)
-    // E_min<E<E_max
-    void check_effective_potential_limits( const Real eps, const Real L, const Real r ) {
+    // E_min<E<E_max CONTINUE
+    void check_effective_potential_limits( const Real eps, const Real L, const Real r = 0 ) {
        Real E_max, E_min;
-       
+       // See appendix_1.nb
+       assert( pow(L,2) - 3.*pow(c,2)*pow(mp,2)*pow(Rs,2) >= 0 );
+       // Get the roots of V'(r)==0:
+       const Real r2 = 
+       (pow(L,2)/pow(mp,2) + 
+            sqrt((pow(L,2) - 
+                 3.*pow(c,2)*pow(mp,2)*pow(Rs,2))/pow(mp,4))*
+             abs(L))/(pow(c,2)*Rs);
+       const Real r1 = 
+       (pow(L,2)/pow(mp,2) - 
+            sqrt((pow(L,2) - 
+                 3.*pow(c,2)*pow(mp,2)*pow(Rs,2))/pow(mp,4))*
+             abs(L))/(pow(c,2)*Rs);
+       if( r != 0 )
+         assert( r1 <= r && r<= r2 );
+
+       // Check energy limits:
+       // V=(Power(c,2) + Power(L,2)/(Power(mp,2)*Power(r,2)))*(1 - Rs/r)
+       E_min=(pow(c,2) + pow(L,2)/(pow(mp,2)*pow(r2,2)))*(1. - Rs/r2);
+       E_max=(pow(c,2) + pow(L,2)/(pow(mp,2)*pow(r1,2)))*(1. - Rs/r1);
+       assert( E_min <= E );
+       assert( E <= E_max );
     }
   }
 
