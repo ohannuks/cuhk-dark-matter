@@ -43,6 +43,15 @@
 % • For some observational motivation, it might suffice to say something along these lines (copypasted..) "The flux of neutrinos from neutralino annihilation in this spike exceeds current experimental upper bounds in some regions of neutralino parameter space. Subsequent work shows @12,13# that synchrotron emission from the motion of electrons and positrons produced by neutralino annihilation in this spike would also be significant and may exceed current upper bounds. The conclusion of Ref. @12# is that either neutralino dark matter or a cuspy halo must be ruled out. Bertone, Sigl and Silk @13#, introducing a different estimate ofsynchrotron self-absorption, find much weaker, but still significant, limits on the neutralino parameters space. Given these very important implications for dark-matter searches, the claim of the possible presence of a steep dark-matter spike at the galactic center and the underlying assumptions should be investigated more carefully. Here we argue that although a possibility, the enhancement found by GS requires somewhat unusual initial conditions for the galactic halo and for the black hole. In particular, we emphasize how crucial it is that the black hole grew adiabatically from a tiny initial mass to its present-day mass, and that this happened precisely at the center of the dark-matter distribution."
 % See PHYSICAL REVIEW D 64 043504 Fig 1; not very good news. Using a toy-model of circular DM circular orbits it was shown that a quick growth de-enhances orbits. On the other hand, this also creates a possibility for non-stable DM annihilation.
 
+% Copypastes from other articles
+% There are other possibilities that could
+% weaken the spike: the formation history of the Milky
+% Way and Sgr A, the influence of an unseen distribution
+% of stars (e.g., compact objects) in the spike, or DM selfinteractions
+% [32]
+
+
+
 \begin{abstract}
 
 \end{abstract}
@@ -53,8 +62,7 @@
 % - Needs to have more things about detection efforts and fruits of research, more motivation
 
 % Note: Since we claim to investigate local dynamics, we could mention a few words on the prospects in the following sections. Or drop the sentence 
-We propose to investigate dark matter distributions near black holes 
-massive blacpickingk holes using GYOTO software to ray-trace dark matter 
+We propose to investigate dark matter distributions near black hole horizons using GYOTO software to ray-trace dark matter 
 particles in a realistic, dynamic astrophysical setting with a 
 growing black hole. The 
 research is motivated due to both the growing interest in indirect 
@@ -63,7 +71,7 @@ neutrino and gamma-ray signals \citep{GS_neutrino_search}
 \citep{indirect_detection_of_dm}, as well as prospects of investigating 
 local dynamics of AGNs and massive black holes in a more general 
 context. For a review of indirect dark matter detection, see 
-\citep{indirect_detection_review}.
+\citep{indirect_detection_review}. %Note: http://arxiv.org/pdf/1310.7040v1.pdf might be a good review
 
 Previous work by Jeremy Schittman 
 \citep{schnittman2015}, which studied distributions of dark matter 
@@ -73,7 +81,7 @@ choosing particles according to Maxwell-Juttner distribution near the
 Kerr black hole horizon. The Maxwell-Juttner distribution was 
 chosen to simulate a dark matter density spike motivated by analytical 
 studies of dark matter distributions around Schwarzschild black holes 
-as a consequence of adiabatic growth 
+as a consequence of adiabatic growth investigated originally by 
 by Gondolo and Silk \citep{GS_2009} 
 and a more recent, fully general relativistic, extension by Sadeghian et al. 
 \citep{Laleh_GR_DM_distributions}.
@@ -100,17 +108,107 @@ Maxwell-Juttner distribution.
 \section{Review of Previous Research}
 
 % Note: Get to the point immediately
-Dark matter is an active research area in cosmology, astrophysics as well as particle physics. It is believed to make up about 85\% of the matter content in the universe. The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, both on small and large scales \citep{this_probably_doesnt_need_a_citation}. In 1999 Gondolo and Silk proposed that dark matter could be detected indirectly by a self-annihilation signal from galactic centres \citep{GS_1999_original}. % Note: Re-read the BSW article thoroughly
 
-The article by Gondolo and Silk proposed a mechanism in which dark matter density could produce a highly dense spike near the centres of galaxies as a consequence of adiabatic growth. The model was analytical, and relied heavily on simplifying assumptions, such as the black hole residing exactly at the centre of the galaxy throughout the adiabatic (slow) growth, and there being no merger events. % Clarify and structure this paragraph a bit later
+% Note: fix the citations later; for now just focus on listing important entries in order
+
+% General note: None of the research has been scrutinized in this review
+% Clearly state the pros and shortcomings of earlier research
+
+% TODO: there's no discussion on annihilation signal from photons or neutrinos
+
+% TODO: No discussion on star orbits
 
 
+Dark matter is an active research area in cosmology, astrophysics as well as particle physics. It is believed to make up about 85\% of the matter 
+content in the universe. The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, 
+both on small and large scales \citep{this_probably_doesnt_need_a_citation}. In 1999 Gondolo and Silk proposed that dark matter could be detected 
+indirectly by a self-annihilation signal from galactic centres \citep{GS_1999_original}. % Note: Re-read the BSW article thoroughly
+The study proposed a simple analytical mechanism in which dark matter density could produce a highly dense spike near the centres of galaxies 
+as a consequence of adiabatic growth. The model was analytical, and relied heavily on simplifying assumptions, such as the black hole residing 
+at the centre of the galaxy throughout the adiabatic (slow) growth, and there being no merger events. % Clarify and structure this paragraph a bit later
 
+Since then, the existence of such a proposed spike has been researched extensively in hopes of 
+indirectly detecting dark matter \citep{lots_of_citations_should_be_easy_to_find}. % Note to self: dump the observational citations into one sentence
+On theoretical side, some more complex extensions to the original theory have been considered, notably non-adiabatic growth models 
+\citep{P_Ullio_2001}, as well as two-component Fokker-Planck models independent of initial conditions have been considered\citep{gnedin_primack_2004}. 
+% Improve sentence structure; break into two sentences; and add both of the citations to the end
+% Note: the Fokker-Planck model should have some more visibility, it deserves it.
+
+% In 2001, P. Ullio et al. considered dynamical processes and concluded that in the case of a simple toy model and considering 
+% only circular orbits, the DM spike would be weakened by non-adiabatic, fast growth.
+% 
+% In 2004, Gnedin and Primack investigated a model independent of initial conditions such as adiabatic growth, and concluded using two-component 
+% Fokker-Planck equation that 
+% dark matter should form minicusps near galactic centres (the authors claim it would provide enough flux for detection), 
+% due to gravitational scattering by dense stellar matter. 
+% Note, for us this could be even more important than the adiabatic growth searches, especially if we will be eventually interested in AGNs.
+
+% Special notes: SIDM cluster: http://journals.aps.org/prd/pdf/10.1103/PhysRevD.89.023506 ; assuming equilibrium solution, one can use weakly collisional approximation to solve cusps in galactic centres (formulated in GR treatment). In this case gravitational (similat to plasma coulomb) interaction was adopted.
+
+% Note: BSW mechanism should be mentioned but maybe not here
+% Until 2011, the theories concerned only newtonian theories (save for ad-hoc corrections 
+% from GR), % Fix the sentence and get rid of clauses
+%  until Banados, Silk and White proposed a mechanism in which Kerr 
+% black holes could act as particle accelerators \citep{BSW_mechanism}. 
+
+
+In 2013, the theory, under the assumption of adiabatic growth, 
+was extended to include general relativistic effects in Schwarzschild metric, 
+implying a shift of the density peak nearer to the black hole  
+and an increate in the magnitude of the dark matter spike 
+\citep{Sadeghian_Ferrer_Will_2013}. The study
+also provided a natural formalism to extend the analysis to 
+Kerr black holes. Even more recently, in 2015, Schnittman 
+studied Kerr black holes and potential dark matter annihilation signal 
+numerically by building a density peak from a Maxwell-Juttner 
+distribution near the black hole horizon and calculated 
+the potential gamma-ray spectra considering selected 
+dark matter models. The study did not simulate the adiabatic 
+growth itself, but built the peak by populating particles 
+near the horizon.
+
+% Add a citation  on the motivation from observations, but don't comment on the specifics
+
+% ADD a paragraph on criticism
+
+% Either remove or modify the following paragraph
+% This is not really the main topic of the proposal, but it is being framed that way
+% The following is REALLY scattered, so fix it later
+Currently, the existence of such a density spike has become 
+increasingly more important, as it  
+is believed to exclude some of the dark matter models, and is 
+being used to narrow down the dark matter parameter space \citep{observational_get_it_from_the_criticism_article}. 
+The existence of the said spike is brought to question by 
+considering non-adiabatic growth and scattering off of dense 
+stellar matter \citep{P_Ullio_2001}. On another other front it is 
+argued that such highly dense stellar matter could not have existed 
+for so long \citep{I_dont_remember_this_one}. 
+It is also argued that scattering would in fact provide a mechanism 
+to create 
+minispikes in the first place \citep{gnedin_primack_2004}. The 
+fate of these highly dense spikes is still undecided.
+% Clarify what you mean here :)
 
 \section{Proposed Research}
 
 % Overview
-% Points to note: Risk analysis should be included here. The proposed research should be focused but at the same time should demonstrate that we are not only relying on a single miracle happening and we can explore other areas.
+% Points to note: Risk analysis should be included here. The proposed research should be 
+% focused but at the same time should demonstrate that we are relying on any one single thing, and that we can explore other areas.
+
+We propose to investigate dark matter distributions formed as a consequence of both adiabatic and non-adiabatic growth near Kerr black holes, 
+as well as calculate prospective annihilation signals. 
+Additionally, we will extend the research to investigate possible perturbations to 
+stellar orbits, as motivated in the no-hair theorem searches \citep{Sadeghian_Ferrer_Will_2013}.
+
+
+The proposed research will be implemented largely with GYOTO ray-tracing framework \citep{gyoto_vincent_2011}, which 
+offers geodesic integrators as well as ray-tracing capabilities similar to the ones used in the previous numerical study by 
+Schnittman. Our boundary conditions will follow thermal distributions at a chosen, large radius. 
+For evolving the kerr metric, our starting point is a step function for the black hole mass, to simulate fast, 
+non-adiabatic growth. % Structure and extend this
+For adiabatic growth, we may choose to simulate a spike distribution extracted from Sadeghian's 
+study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, will be done with the tools provided by GYOTO for ray-tracing and 
+calculating photon emissions.
 
 \subsection{Methods}
 
@@ -119,6 +217,31 @@ The article by Gondolo and Silk proposed a mechanism in which dark matter densit
 % Phase-space sampling
 % A few relevant equations with explanations
 % For the future: Local consequences? A few words should suffice and should still be within the scope of this proposal
+% Note: we should have something more novel and exciting here
+
+The research will be largely theoretical and numerical. A few essential ingredients that need to be implemented:
+
+\begin{enumerate}
+ \item * Geodesic integrators
+ \item * High-performance code % Modify this
+ \item * Kerr metric
+ \item ^ Emission from dark matter annihilations
+ \item Dynamically allocated phase-space sampling
+ \item Dynamic metric; step-function
+ \item Criterion for bound orbits
+ \item Annihilation
+ \item (Two-component model)
+ \item (Scattering effects)
+\end{enumerate},
+
+where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented.
+
+\textbf{Dynamically allocated phase-space sampling}; we will use the well-known approach used in most numerical recipes that require 
+a sparse grid, which was also used in the recent article by Schnittman \citep{schnittman2015}. % I feel a bit like citing one of Vlasiator articles, since we need to also show we are qualified to go through with the research
+We will implement the distribution function on a binned grid by assigning a weigh on the grid by the corresponding time each particle spends in 
+that grid bin. We will choose to record the full distribution function $f(x^\mu,p^\nu)$ only in places of high density due to the otherwise 
+huge memory requirement ($\approx 10^3^5$ bins).
+
 
 \subsection{Data analysis}
 
@@ -129,6 +252,13 @@ The article by Gondolo and Silk proposed a mechanism in which dark matter densit
 
 % Bad title; add something about expected results and what we want to do with the data we're getting
 
+\subsection{Extending research}
+
+% List out here:
+% Local effects of DM distributions for e.g. AGNs, orbits, etc. See the mindmap
+% Should we mention anything about observations here? It is the logical 'next step' but we should be able to convince we actually have the resources to follow through with it, given 
+% that we don't have observational people to consult to
+
 
 \section{Summary}
 
@@ -137,6 +267,7 @@ The article by Gondolo and Silk proposed a mechanism in which dark matter densit
 \section{Resources}
 
 % Self-explanatory; explain the computational resources we can request and pursue
+% Most of these can be dug up from Schnittman article; it can also have our own initial estimates from GYOTO performance
 
 \section{Schedule}
 
