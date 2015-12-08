@@ -210,6 +210,10 @@ For adiabatic growth, we may choose to simulate a spike distribution extracted f
 study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, will be done with the tools provided by GYOTO for ray-tracing and 
 calculating photon emissions.
 
+\subsection{Theory}
+
+% Include very detailed process of how we get from step A to step B; this section and the Methods section should ideally complement each other
+
 \subsection{Methods}
 
 % GYOTO ray-tracer
@@ -218,6 +222,8 @@ calculating photon emissions.
 % A few relevant equations with explanations
 % For the future: Local consequences? A few words should suffice and should still be within the scope of this proposal
 % Note: we should have something more novel and exciting here
+
+\subsubsection{Technical}
 
 The research will be largely theoretical and numerical. A few essential ingredients that need to be implemented:
 
@@ -234,7 +240,8 @@ The research will be largely theoretical and numerical. A few essential ingredie
  \item (Scattering effects)
 \end{enumerate},
 
-where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented.
+where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented. 
+Entries within clauses will be optional.
 
 \textbf{Dynamically allocated phase-space sampling}; we will use the well-known approach used in most numerical recipes that require 
 a sparse grid, which was also used in the recent article by Schnittman \citep{schnittman2015}. % I feel a bit like citing one of Vlasiator articles, since we need to also show we are qualified to go through with the research
@@ -242,11 +249,25 @@ We will implement the distribution function on a binned grid by assigning a weig
 that grid bin. We will choose to record the full distribution function $f(x^\mu,p^\nu)$ only in places of high density due to the otherwise 
 huge memory requirement ($\approx 10^3^5$ bins).
 
+\textbf{Dynamic metric; step-function}; a step-function for mass will be implemented, which will be used to evolve the Kerr metric. 
+Luckily, GYOTO has support for changing the metric via a plugin, or even include numerically evolving metrics, and so we will 
+implement this in GYOTO.
+
+\textbf{Criterion for bound orbits}; well-known approximate results for bound orbits will be used, and we will have an additional criterion 
+for excluding orbits that either go too far to contribute to the overall phase space, or hit the black hole horizon.
+
+% Note: we have not really discussed this, so don't say anything yet.
+% Note: Annihilation should be possible to do during the construction of phase space, and during/after the evolution phase in a more realistic 
+%manner (e.g. Boltzmann equation)
+% \textbf{Annihilation}; We will implement annihilation mechanism as a post-processing tool once a stable state mentioned in section 
+% \ref{ssec:methods_theory}, by modifying the distribution function.
+
 
 \subsection{Data analysis}
 
 % Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_2009} and Schnittman's paper.
 % Note: GYOTO offers ray-tracing and constructing images so obviously it should be used here
+% TODO: Re-read the 2011 Vincent GYOTO article and execute a few sample codes in GYOTO 
 
 \subsection{Results}
 
