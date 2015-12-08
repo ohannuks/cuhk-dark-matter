@@ -81,7 +81,7 @@ choosing particles according to Maxwell-Juttner distribution near the
 Kerr black hole horizon. The Maxwell-Juttner distribution was 
 chosen to simulate a dark matter density spike motivated by analytical 
 studies of dark matter distributions around Schwarzschild black holes 
-as a consequence of adiabatic growth 
+as a consequence of adiabatic growth investigated originally by 
 by Gondolo and Silk \citep{GS_2009} 
 and a more recent, fully general relativistic, extension by Sadeghian et al. 
 \citep{Laleh_GR_DM_distributions}.
@@ -113,6 +113,10 @@ Maxwell-Juttner distribution.
 
 % General note: None of the research has been scrutinized in this review
 % Clearly state the pros and shortcomings of earlier research
+
+% TODO: there's no discussion on annihilation signal from photons or neutrinos
+
+% TODO: No discussion on star orbits
 
 
 Dark matter is an active research area in cosmology, astrophysics as well as particle physics. It is believed to make up about 85\% of the matter 
@@ -149,7 +153,7 @@ On theoretical side, some more complex extensions to the original theory have be
 
 
 In 2013, the theory, under the assumption of adiabatic growth, 
-was extended to include general relativistic effects, 
+was extended to include general relativistic effects in Schwarzschild metric, 
 implying a shift of the density peak nearer to the black hole  
 and an increate in the magnitude of the dark matter spike 
 \citep{Sadeghian_Ferrer_Will_2013}. The study
@@ -188,7 +192,23 @@ fate of these highly dense spikes is still undecided.
 \section{Proposed Research}
 
 % Overview
-% Points to note: Risk analysis should be included here. The proposed research should be focused but at the same time should demonstrate that we are not only relying on a single miracle happening and we can explore other areas.
+% Points to note: Risk analysis should be included here. The proposed research should be 
+% focused but at the same time should demonstrate that we are relying on any one single thing, and that we can explore other areas.
+
+We propose to investigate dark matter distributions formed as a consequence of both adiabatic and non-adiabatic growth near Kerr black holes, 
+as well as calculate prospective annihilation signals. 
+Additionally, we will extend the research to investigate possible perturbations to 
+stellar orbits, as motivated in the no-hair theorem searches \citep{Sadeghian_Ferrer_Will_2013}.
+
+
+The proposed research will be implemented largely with GYOTO ray-tracing framework \citep{gyoto_vincent_2011}, which 
+offers geodesic integrators as well as ray-tracing capabilities similar to the ones used in the previous numerical study by 
+Schnittman. Our boundary conditions will follow thermal distributions at a chosen, large radius. 
+For evolving the kerr metric, our starting point is a step function for the black hole mass, to simulate fast, 
+non-adiabatic growth. % Structure and extend this
+For adiabatic growth, we may choose to simulate a spike distribution extracted from Sadeghian's 
+study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, will be done with the tools provided by GYOTO for ray-tracing and 
+calculating photon emissions.
 
 \subsection{Methods}
 
@@ -197,6 +217,31 @@ fate of these highly dense spikes is still undecided.
 % Phase-space sampling
 % A few relevant equations with explanations
 % For the future: Local consequences? A few words should suffice and should still be within the scope of this proposal
+% Note: we should have something more novel and exciting here
+
+The research will be largely theoretical and numerical. A few essential ingredients that need to be implemented:
+
+\begin{enumerate}
+ \item * Geodesic integrators
+ \item * High-performance code % Modify this
+ \item * Kerr metric
+ \item ^ Emission from dark matter annihilations
+ \item Dynamically allocated phase-space sampling
+ \item Dynamic metric; step-function
+ \item Criterion for bound orbits
+ \item Annihilation
+ \item (Two-component model)
+ \item (Scattering effects)
+\end{enumerate},
+
+where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented.
+
+\textbf{Dynamically allocated phase-space sampling}; we will use the well-known approach used in most numerical recipes that require 
+a sparse grid, which was also used in the recent article by Schnittman \citep{schnittman2015}. % I feel a bit like citing one of Vlasiator articles, since we need to also show we are qualified to go through with the research
+We will implement the distribution function on a binned grid by assigning a weigh on the grid by the corresponding time each particle spends in 
+that grid bin. We will choose to record the full distribution function $f(x^\mu,p^\nu)$ only in places of high density due to the otherwise 
+huge memory requirement ($\approx 10^3^5$ bins).
+
 
 \subsection{Data analysis}
 
@@ -207,6 +252,13 @@ fate of these highly dense spikes is still undecided.
 
 % Bad title; add something about expected results and what we want to do with the data we're getting
 
+\subsection{Extending research}
+
+% List out here:
+% Local effects of DM distributions for e.g. AGNs, orbits, etc. See the mindmap
+% Should we mention anything about observations here? It is the logical 'next step' but we should be able to convince we actually have the resources to follow through with it, given 
+% that we don't have observational people to consult to
+
 
 \section{Summary}
 
@@ -215,6 +267,7 @@ fate of these highly dense spikes is still undecided.
 \section{Resources}
 
 % Self-explanatory; explain the computational resources we can request and pursue
+% Most of these can be dug up from Schnittman article; it can also have our own initial estimates from GYOTO performance
 
 \section{Schedule}
 
