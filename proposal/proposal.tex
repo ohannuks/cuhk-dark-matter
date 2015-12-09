@@ -209,7 +209,8 @@ Schnittman. Our boundary conditions will follow thermal distributions at a chose
 For evolving the kerr metric, our starting point is a step function for the black hole mass, to simulate fast, 
 non-adiabatic growth. % Structure and extend this
 For adiabatic growth, we may choose to simulate a spike distribution extracted from Sadeghian's 
-study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, will be done with the tools provided by GYOTO for ray-tracing and 
+study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, 
+will be done with the tools provided by GYOTO for ray-tracing and 
 calculating photon emissions.
 
 \subsection{Theory}
@@ -223,7 +224,10 @@ following steps:
 % Note: Is it better to structure it like this or add a paragraph? On one hand a paragraph is more formal, but this is 
 %undoubtedly clearer and simpler
 \begin{enumerate}
- \item Evolve the phase space under constant Kerr metric
+ \item Initialize boundary conditions with constant velocity distribution
+ \item Calculate Geodesics of dark matter particles
+ \item Evolve the phase space to a stable state under constant Kerr metric % Note: for this one, we might even consider looking into the stellar scattering paper, since we might be able to construct a DM spike even without BH growth
+ \item Evolve Kerr metric by increasing Kerr properties (mass and/or spin)
  \item 
 \end{enumerate}
 
