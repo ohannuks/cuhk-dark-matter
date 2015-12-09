@@ -223,18 +223,29 @@ following steps:
 
 % Note: Is it better to structure it like this or add a paragraph? On one hand a paragraph is more formal, but this is 
 %undoubtedly clearer and simpler
+% Note: The items in parentheses are still under review and have not been well-established in this context. They could even change places from the post-processing phase.
 \begin{enumerate}
  \item Initialize boundary conditions with constant velocity distribution
  \item Calculate Geodesics of dark matter particles
  \item Evolve the phase space, labelled $f_0$, to a stable state under constant Kerr metric % Note: for this one, we might even consider looking into the stellar scattering paper, since we might be able to construct a DM spike even without BH growth
  \item Evolve Kerr metric by increasing Kerr metric properties (mass and/or spin)
  \item Evolve the existing phase space, $f_0$, to a new stable state in the new Kerr metric $f_1$
+ \item (Calculating emission rates) % Check theory,
+ \item (Calculating scattering rates) % Check existing literature
+ \item (Estimating observability, fluxes) % Check
+ \item (Estimating effects on stellar orbits) % Check
 \end{enumerate}
 
+% Short summary; this is very informal so add a bit of structure and perhaps add this into a separate subsection
+The theory for this has already been established; we need the knowledge of boundary conditions, which is found to be 
+an approximately Maxwellian velocity distribution \citep{dm_halo_maxwellian}. For calculating geodesics, we can use 
+existing literature on Kerr metric and the geodesics in them \citep{does_this_even_need_a_citation}. For evolving 
+the phase space, we choose to use the particle approach and to sample the phase space, as documented in e.g. 
+\citep{schnittman2015}\citep{any_vlasov_PIC_paper}, with the assumption that the phase space will 
+reach a stable state. For evolving the Kerr metric, we use a simple step function: $M_0 \rightarrow M_1$. Evolving 
+the existing phase space will then be straightforward by the already established methods.
+% TODO: Finish the above paragraph
 
-For more detailed derivations, please see Appendix \ref{appendix:theory}.
-
-\subsubsection{A short review}
 
 % Note: finish this or drop it completely. It may not really offer much to introduce the Boltzmann equation, since we're anyway sampling the phase space based on
 %particle view
@@ -273,6 +284,8 @@ For bound orbits, it suffices to use the conditions
 \begin{equation}
  approximateboundorbits
 \end{equation}
+
+For more detailed derivations, please see Appendix \ref{appendix:theory}.
 
 \subsubsection{Initial conditions}
 
