@@ -215,7 +215,26 @@ calculating photon emissions.
 % Include very detailed process of how we get from step A to step B; this section and the Methods section should ideally complement each other
 % Note: Add only a few equations
 
+
+
+For more detailed derivations, please see Appendix \ref{appendix:theory}.
+
 \subsubsection{A short review}
+
+% Note: finish this or drop it completely. It may not really offer much to introduce the Boltzmann equation, since we're anyway sampling the phase space based on
+%particle view
+% The general relativistic Einstein-Boltzmann equation is defined
+% 
+% \begin{equation}
+%  Boltzmann
+% \end{equation}
+% 
+% , where $\Gamma$ is the christoffel symbol and ..
+% 
+% We are mostly concerned with the geodesics for this equation
+
+
+% Note remove the detailed theory here and put into appendix
 
 Kerr metric in Boyer-Lindquist coordinates is:
 
@@ -225,12 +244,37 @@ Kerr metric in Boyer-Lindquist coordinates is:
 
 where ..
 
-For our research, we are interested in the well-known geodesic equation for the metric 
+For our research, we are interested in the well-known geodesic equations for the metric 
 
+
+% Get it from any source
 \begin{equation}
- 
+ geodesic
 \end{equation}
 
+For bound orbits, it suffices to use the conditions
+
+% Should probably be done numerically
+\begin{equation}
+ approximateboundorbits
+\end{equation}
+
+\subsubsection{Initial conditions}
+
+We begin by shooting non-interacting dark matter particles from radius $r_0$, far outside the reach of the black hole. 
+% Note: is the approximation of dominating Kerr 'potential' valid here?
+For the boundary conditions, we use thermal distribution function, shown to be a good approximation in most 
+dark matter halos \citep{dm_halo_maxwellian}:
+
+\begin{equation}
+ thermaldistribution
+\end{equation},
+
+where .., and we choose $T$ to be \citep{should_be_known}. % Or velocity dispersion, same thing
+
+\subsubsection{Reaching a stable state}
+
+Our aim is to construct 
 
 
 \subsection{Methods}
