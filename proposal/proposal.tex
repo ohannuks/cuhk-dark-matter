@@ -200,6 +200,8 @@ as well as calculate prospective annihilation signals.
 Additionally, we will extend the research to investigate possible perturbations to 
 stellar orbits, as motivated in the no-hair theorem searches \citep{Sadeghian_Ferrer_Will_2013}.
 
+% The problem becomes fairly simple under the assumption of weakly or non-interacting dark matter, where we can 
+% assume that the inter-particle interactions as well as e.g. gravitational scattering from stars become negligible. 
 
 The proposed research will be implemented largely with GYOTO ray-tracing framework \citep{gyoto_vincent_2011}, which 
 offers geodesic integrators as well as ray-tracing capabilities similar to the ones used in the previous numerical study by 
@@ -207,8 +209,101 @@ Schnittman. Our boundary conditions will follow thermal distributions at a chose
 For evolving the kerr metric, our starting point is a step function for the black hole mass, to simulate fast, 
 non-adiabatic growth. % Structure and extend this
 For adiabatic growth, we may choose to simulate a spike distribution extracted from Sadeghian's 
-study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, will be done with the tools provided by GYOTO for ray-tracing and 
+study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating either photon or neutrino signal, 
+will be done with the tools provided by GYOTO for ray-tracing and 
 calculating photon emissions.
+
+\subsection{Theory}
+
+% Include very detailed process of how we get from step A to step B; this section and the Methods section should ideally complement each other
+% Note: Add only a few equations
+
+Our aim is to calculate the evolution of the phase space of dark matter near Kerr black holes. For this, we choose to proceed by the 
+following steps:
+
+% Note: Is it better to structure it like this or add a paragraph? On one hand a paragraph is more formal, but this is 
+%undoubtedly clearer and simpler
+% Note: The items in parentheses are still under review and have not been well-established in this context. They could even change places from the post-processing phase.
+\begin{enumerate}
+ \item Initialize boundary conditions with constant velocity distribution
+ \item Calculate Geodesics of dark matter particles
+ \item Evolve the phase space, labelled $f_0$, to a stable state under constant Kerr metric % Note: for this one, we might even consider looking into the stellar scattering paper, since we might be able to construct a DM spike even without BH growth
+ \item Evolve Kerr metric by increasing Kerr metric properties (mass and/or spin)
+ \item Evolve the existing phase space, $f_0$, to a new stable state in the new Kerr metric $f_1$
+ \item (Calculating emission rates) % Check theory,
+ \item (Calculating scattering rates) % Check existing literature
+ \item (Estimating observability, fluxes) % Check
+ \item (Estimating effects on stellar orbits) % Check
+\end{enumerate}
+
+% Short summary; this is very informal so add a bit of structure and perhaps add this into a separate subsection
+The theory for this has already been established; we need the knowledge of boundary conditions, which is found to be 
+an approximately Maxwellian velocity distribution \citep{dm_halo_maxwellian}. For calculating geodesics, we can use 
+existing literature on Kerr metric and the geodesics in them \citep{does_this_even_need_a_citation}. For evolving 
+the phase space, we choose to use the particle approach and to sample the phase space, as documented in e.g. 
+\citep{schnittman2015}\citep{any_vlasov_PIC_paper}, with the assumption that the phase space will 
+reach a stable state. For evolving the Kerr metric, we use a simple step function: $M_0 \rightarrow M_1$. Evolving 
+the existing phase space will then be straightforward by the already established methods.
+% TODO: Finish the above paragraph
+
+
+% Note: finish this or drop it completely. It may not really offer much to introduce the Boltzmann equation, since we're anyway sampling the phase space based on
+%particle view
+% The general relativistic Einstein-Boltzmann equation is defined
+% 
+% \begin{equation}
+%  Boltzmann
+% \end{equation}
+% 
+% , where $\Gamma$ is the christoffel symbol and ..
+% 
+% We are mostly concerned with the geodesics for this equation
+
+
+% Note remove the detailed theory here and put into appendix
+
+% Kerr metric in Boyer-Lindquist coordinates is:
+% 
+% \begin{equation}
+%  KerrMetric
+% \end{equation},
+% 
+% where ..
+% 
+% For our research, we are interested in the well-known geodesic equations for the metric 
+% 
+% 
+% % Get it from any source
+% \begin{equation}
+%  geodesic
+% \end{equation}
+% 
+% For bound orbits, it suffices to use the conditions
+% 
+% % Should probably be done numerically
+% \begin{equation}
+%  approximateboundorbits
+% \end{equation}
+
+For more detailed derivations, please see Appendix \ref{appendix:theory}.
+
+\subsubsection{Initial conditions}
+
+We begin by shooting non-interacting dark matter particles from radius $r_0$, far outside the reach of the black hole. 
+% Note: is the approximation of dominating Kerr 'potential' valid here?
+For the boundary conditions, we use thermal distribution function, shown to be a good approximation in most 
+dark matter halos \citep{dm_halo_maxwellian}:
+
+\begin{equation}
+ thermaldistribution
+\end{equation},
+
+where .., and we choose $T$ to be \citep{should_be_known}. % Or velocity dispersion, same thing
+
+\subsubsection{Reaching a stable state}
+
+Our aim is to construct 
+
 
 \subsection{Methods}
 
@@ -218,6 +313,8 @@ calculating photon emissions.
 % A few relevant equations with explanations
 % For the future: Local consequences? A few words should suffice and should still be within the scope of this proposal
 % Note: we should have something more novel and exciting here
+
+\subsubsection{Technical}
 
 The research will be largely theoretical and numerical. A few essential ingredients that need to be implemented:
 
@@ -234,7 +331,8 @@ The research will be largely theoretical and numerical. A few essential ingredie
  \item (Scattering effects)
 \end{enumerate},
 
-where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented.
+where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented. 
+Entries within clauses will be optional.
 
 \textbf{Dynamically allocated phase-space sampling}; we will use the well-known approach used in most numerical recipes that require 
 a sparse grid, which was also used in the recent article by Schnittman \citep{schnittman2015}. % I feel a bit like citing one of Vlasiator articles, since we need to also show we are qualified to go through with the research
@@ -242,15 +340,62 @@ We will implement the distribution function on a binned grid by assigning a weig
 that grid bin. We will choose to record the full distribution function $f(x^\mu,p^\nu)$ only in places of high density due to the otherwise 
 huge memory requirement ($\approx 10^3^5$ bins).
 
+\textbf{Dynamic metric; step-function}; a step-function for mass will be implemented, which will be used to evolve the Kerr metric. 
+Luckily, GYOTO has support for changing the metric via a plugin, or even include numerically evolving metrics, and so we will 
+implement this in GYOTO.
+
+\textbf{Criterion for bound orbits}; well-known approximate results for bound orbits will be used, and we will have an additional criterion 
+for excluding orbits that either go too far to contribute to the overall phase space, or hit the black hole horizon.
+
+% Note: we have not really discussed this, so don't say anything yet.
+% Note: Annihilation should be possible to do during the construction of phase space, and during/after the evolution phase in a more realistic 
+%manner (e.g. Boltzmann equation)
+% \textbf{Annihilation}; We will implement annihilation mechanism as a post-processing tool once a stable state mentioned in section 
+% \ref{ssec:methods_theory}, by modifying the distribution function.
+
+
 
 \subsection{Data analysis}
 
 % Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_2009} and Schnittman's paper.
 % Note: GYOTO offers ray-tracing and constructing images so obviously it should be used here
+% TODO: Re-read the 2011 Vincent GYOTO article and execute a few sample codes in GYOTO 
 
 \subsection{Results}
 
 % Bad title; add something about expected results and what we want to do with the data we're getting
+
+\subsection{Summary of actions to take}
+
+
+% TODO: This is largely unfinished, and most of the items are not covered in the proposal!
+\begin{enumerate}
+ \item Establish basic checks
+ \begin{enumerate}
+  \item Measure GYOTO performance by producing a graph of geodesic integration, which is presumably the heaviest part of the simulation.
+  \item Numerical adiabatic growth \citep{Sadeghian_Ferrer_Will_2013}
+  \item GYOTO ray-tracing tools; investigate its capabilities, performance and accuracy as well as usability
+  \item See existing software for phase space sampling (unstructured or sparse grids)
+ \end{enumerate}
+ \item Run test runs without phase space sampling, using thermal distribution
+ \begin{enumerate}
+  \item Create and verify checks for geodesic orbits and limits of bound orbits
+  \item Establish the common bottlenecks in GYOTO and our approach
+  \item Try changing the Kerr metric during a run
+ \end{enumerate}
+ \item Create support for sampling and saving the phase space distribution
+ \item Run the full simulation
+ \begin{enumerate}
+  \item Analyze and verify results
+  \item Create test cases
+ \end{enumerate}
+ \item Post-processing
+ \begin{enumerate}
+  \item Analyze data
+  \item ..
+ \end{enumerate}
+\end{enumerate}
+
 
 \subsection{Extending research}
 

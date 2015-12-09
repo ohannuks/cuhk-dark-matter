@@ -575,6 +575,7 @@ namespace tests {
     // E_max = Potential(r-)
     // E_min<E<E_max CONTINUE
     void check_effective_potential_limits( const Real eps, const Real L, const Real r = 0 ) {
+       // TODO: Correct the E; we used (eps^2-1/2 mc^2) whereas in the effective potential analysis we used only eps^2
        Real E_max, E_min;
        // See appendix_1.nb
        assert( pow(L,2) - 3.*pow(c,2)*pow(mp,2)*pow(Rs,2) >= 0 );
