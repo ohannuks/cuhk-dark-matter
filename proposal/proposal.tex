@@ -354,6 +354,7 @@ for excluding orbits that either go too far to contribute to the overall phase s
 % \ref{ssec:methods_theory}, by modifying the distribution function.
 
 
+
 \subsection{Data analysis}
 
 % Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_2009} and Schnittman's paper.
@@ -363,6 +364,38 @@ for excluding orbits that either go too far to contribute to the overall phase s
 \subsection{Results}
 
 % Bad title; add something about expected results and what we want to do with the data we're getting
+
+\subsection{Summary of actions to take}
+
+
+% TODO: This is largely unfinished, and most of the items are not covered in the proposal!
+\begin{enumerate}
+ \item Establish basic checks
+ \begin{enumerate}
+  \item Measure GYOTO performance by producing a graph of geodesic integration, which is presumably the heaviest part of the simulation.
+  \item Numerical adiabatic growth \citep{Sadeghian_Ferrer_Will_2013}
+  \item GYOTO ray-tracing tools; investigate its capabilities, performance and accuracy as well as usability
+  \item See existing software for phase space sampling (unstructured or sparse grids)
+ \end{enumerate}
+ \item Run test runs without phase space sampling, using thermal distribution
+ \begin{enumerate}
+  \item Create and verify checks for geodesic orbits and limits of bound orbits
+  \item Establish the common bottlenecks in GYOTO and our approach
+  \item Try changing the Kerr metric during a run
+ \end{enumerate}
+ \item Create support for sampling and saving the phase space distribution
+ \item Run the full simulation
+ \begin{enumerate}
+  \item Analyze and verify results
+  \item Create test cases
+ \end{enumerate}
+ \item Post-processing
+ \begin{enumerate}
+  \item Analyze data
+  \item ..
+ \end{enumerate}
+\end{enumerate}
+
 
 \subsection{Extending research}
 
