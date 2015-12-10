@@ -46,6 +46,14 @@
 
 \newpage
 
+\section*{Unofficial guide to the reader}
+
+Hi. I wrote this article following some of the formal guidelines set by most universities. 
+If you want a quick overview of this research proposal, I would suggest starting by looking at 
+the list in the theory section \ref{ssec:theory}, the list in \ref{ssec:methods} and 
+the summary of acctions in \ref{ssec:actions}.
+
+
 \section{Introduction}
 
 % Comments: should be separated into Introduction and Review of Previous Research
@@ -78,7 +86,7 @@ Kerr black hole horizon \citep{schnittman2015}.
 The Maxwell-Juttner distribution was 
 chosen to simulate a dark matter density spike motivated by analytical 
 studies of dark matter distributions around Schwarzschild black holes 
-as a consequence of adiabatic growth investigated originally by 
+as a consequence of adiabatic growth investigated originally 
 by Gondolo and Silk \citep{GS_1999} 
 and a more recent, fully general relativistic, extension by Sadeghian et al. 
 \citep{Sadeghian_Ferrer_Will_2013}.
@@ -255,7 +263,7 @@ study \citep{Sadeghian_Ferrer_Will_2013}. The post-processing, calculating eithe
 will be done with the tools provided by GYOTO for ray-tracing and 
 calculating photon emissions.
 
-\subsection{Theory}
+\subsection{Theory} \label{ssec:theory}
 
 % Include very detailed process of how we get from step A to step B; this section and the Methods section should ideally complement each other
 % Note: Add only a few equations; nothing is set in stone
@@ -344,14 +352,14 @@ For the boundary conditions, we use thermal distribution function, shown to be a
 dark matter halos
 
 
-\subsubsection{Reaching a stable state}
+% \subsubsection{Reaching a stable state}
+% 
+% % Note: do we need this section? We simply need to evaluate a stable state, it's fairly obvious that at some point the system will be in a stable state..
+% 
+% Our aim is to 
 
-% TODO: Finish the math
 
-Our aim is to 
-
-
-\subsection{Methods}
+\subsection{Methods} \label{ssec:methods}
 
 % GYOTO ray-tracer
 % Analytic calculations; Kerr black hole; kinetic physics
@@ -426,7 +434,7 @@ general phase spaces.
 
 % Bad title; add something about expected results and what we want to do with the data we're getting
 
-\subsection{Summary of actions}
+\subsection{Summary of actions} \label{ssec:actions}
 
 
 % TODO: This is largely unfinished, and most of the items are not covered in the proposal!
@@ -474,6 +482,7 @@ general phase spaces.
 
 % Self-explanatory; explain the computational resources we can request and pursue
 % Most of these can be dug up from Schnittman article; it can also have our own initial estimates from GYOTO performance
+% Note: Do we need an observational person? We could try to contact one of the people doing spike observations and specifically ask what we need
 
 \section{Schedule}
 
