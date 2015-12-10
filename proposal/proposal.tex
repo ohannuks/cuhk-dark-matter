@@ -387,7 +387,11 @@ implement this within GYOTO framework.
 for excluding orbits that either go too far to contribute to the overall phase space, or hit the black hole horizon. These can be found in 
 \citep{Sadeghian_Ferrer_Will_2013, schnittman2015}.
 
-\textbf{Annihilation}; 
+\textbf{Annihilation}; investigating various annihilation methods will be a part of our research. 
+There are well-established methods for calculating 
+particle-annihilation within phase-spaces (see for example \citep{boltzmann_dm_annihilation}), 
+but very few literatures discuss optimal methods for capturing the physics in cases such as 
+our step growth black hole model.
 
 % Note: we have not really discussed this, so don't say anything yet.
 % Note: Annihilation should be possible to do during the construction of phase space, and during/after the evolution phase in a more realistic 
@@ -402,6 +406,15 @@ for excluding orbits that either go too far to contribute to the overall phase s
 % Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_1999} and Schnittman's paper.
 % Note: GYOTO offers ray-tracing and constructing images so obviously it should be used here
 % TODO: Re-read the 2011 Vincent GYOTO article and execute a few sample codes in GYOTO 
+
+\subsubsection{Annihilation signal}
+
+In our data-analysis, we will need to establish ways to measure the potential incoming neutrino and gamma-ray flux.
+
+\subsubsection{Calculating star orbits}
+
+For this, we will use the methods mentioned in \citep{Sadeghian_Ferrer_Will_2013}, which can be easily extended to 
+general phase spaces.
 
 \subsection{Results}
 
