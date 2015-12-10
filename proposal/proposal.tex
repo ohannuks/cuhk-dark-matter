@@ -1,5 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{natbib}
+
 
 %opening
 \title{}
@@ -10,48 +12,6 @@
 \begin{document}
 
 \maketitle
-
-% General note: The current aim is to focus on content. I'll fix the scattered paragraphs and chaotic writing style later
-
-% A few generic notes to keep in mind (copied from the wide web):
-% • How is it done today, and what are the limits of current practice?
-% • What's new in your approach and why do you think it will be
-% successful?
-% • Who cares?
-% • If you're successsful, what difference will it make?
-% • What are the risks and the payoffs?
-% • How much will it cost? (computational resources)
-% • How long will it take?
-% • What are the midterm and final "exams" to check for success?
-% • What makes you suitable to conduct the research?
-
-
-% Some questions to address (see also the following paragraph):
-% • How realistic is a merger event and a step mass growth? Would we be able to detect anything?
-% • What would be the consequences? Would it address e.g. the problem of dark matter annihilation reaching a stable state?
-% • What kind of local consequences do DM distributions have from a general astrophysics view? E.g. in Sadeghian's article the point of interest was mostly consequences to local DM distributions (and whether they would cause smaller order perturbations to star orbits)
-
-% From discussion with MC:
-% • Merger event: Try to establish some analysis of time scales from e.g. Binney and Tremaine's book and previous research (there was discussion on orbit times, dynamical timescales etc in one of Francesc' presentations)
-% • Detection efforts: This should be framed as one of the central points of the proposal; for now we should not be able to give sensible estimates on detectability without going through with the research. The previous research by Gondolo and Silk on neutrino and gamma-ray detection efforts could be cited, but not used for predicting outcomes.
-% • Let's not focus on observations too much (e.g. Fermi-LAT and IceCube data). It can be considered to be out of the scope of this proposal. Some well-established methods for calculating e,g, neutrino fluxes can be directly applied from e.g. some of Silk's papers. 
-% • GYOTO can be used for ray-tracing, so it should be a natural tool to apply when it comes to analyzing data and observability.
-% • For consequences; it should suffice to dig up a few papers on adiabatic vs non-adiabatic growth (even in Newtonian treatment) and to argue whether non-adiabatic growth would a) enhance (or de-enhance) a dark matter spike near black holes and  b) That dark matter annihilation flux should be greater because annihilation cannot reach a stable state
-% • For local consequences; since we have not looked very much into this it suffices to mention that e.g. perturbations from dark matter distributions could affect star orbits (a central point in Sadeghian's thesis). Also a natural extension in the GYOTO framework. In this proposal we avoid discussing other local effects e.g. AGN physics, unless framed in a very general way.
-
-% Smaller Notes:
-% • Some criticism on DM spikes in the first place: "Dark-matter spike at the galactic center? 2002"
-% • Another big motivation for this proposal: since a large part of indirect dark matter searches come from the research on DM spikes and there are many smaller areas that "branch off" from the spike results, it should be investigated thoroughly
-% • For some observational motivation, it might suffice to say something along these lines (copypasted..) "The flux of neutrinos from neutralino annihilation in this spike exceeds current experimental upper bounds in some regions of neutralino parameter space. Subsequent work shows @12,13# that synchrotron emission from the motion of electrons and positrons produced by neutralino annihilation in this spike would also be significant and may exceed current upper bounds. The conclusion of Ref. @12# is that either neutralino dark matter or a cuspy halo must be ruled out. Bertone, Sigl and Silk @13#, introducing a different estimate ofsynchrotron self-absorption, find much weaker, but still significant, limits on the neutralino parameters space. Given these very important implications for dark-matter searches, the claim of the possible presence of a steep dark-matter spike at the galactic center and the underlying assumptions should be investigated more carefully. Here we argue that although a possibility, the enhancement found by GS requires somewhat unusual initial conditions for the galactic halo and for the black hole. In particular, we emphasize how crucial it is that the black hole grew adiabatically from a tiny initial mass to its present-day mass, and that this happened precisely at the center of the dark-matter distribution."
-% See PHYSICAL REVIEW D 64 043504 Fig 1; not very good news. Using a toy-model of circular DM circular orbits it was shown that a quick growth de-enhances orbits. On the other hand, this also creates a possibility for non-stable DM annihilation.
-
-% Copypastes from other articles
-% There are other possibilities that could
-% weaken the spike: the formation history of the Milky
-% Way and Sgr A, the influence of an unseen distribution
-% of stars (e.g., compact objects) in the spike, or DM selfinteractions
-% [32]
-
 
 
 \begin{abstract}
@@ -69,7 +29,8 @@ particles in a dynamic astrophysical setting with a
 growing black hole. The 
 research is motivated due to both the growing interest in indirect 
 detection of dark matter by astrophysical signals such as 
-neutrino and gamma-ray signals \citep{2015_Arina__Silk}  % Note: this could be modified
+neutrino and gamma-ray signals 
+\citep{2015_Arina_Silk}  % Note: this could be modified
 %\citep{indirect_detection_of_dm}
 , as well as prospects of investigating 
 local dynamics of AGNs and massive black holes in a more general 
@@ -86,12 +47,12 @@ The Maxwell-Juttner distribution was
 chosen to simulate a dark matter density spike motivated by analytical 
 studies of dark matter distributions around Schwarzschild black holes 
 as a consequence of adiabatic growth investigated originally by 
-by Gondolo and Silk \citep{GS_2009} 
+by Gondolo and Silk \citep{GS_1999} 
 and a more recent, fully general relativistic, extension by Sadeghian et al. 
-\citep{Laleh_GR_DM_distributions}.
+\citep{Sadeghian_Ferrer_Will_2013}.
 
 The previous analytical work has concerned Schwarzschild black holes 
-and adiabatic growth \citep{GS_2009, Laleh_GR_DM_distributions}, as well 
+and adiabatic growth \citep{GS_1999, Sadeghian_Ferrer_Will_2013}, as well 
 as two-component models including gravitational scattering of stars 
 with dark matter,
 whereas the numerical work by Jeremy Schnittman 
@@ -142,7 +103,7 @@ Dark matter is an active research area in cosmology, astrophysics as well as par
 The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, 
 both on small and large scales. %\citep{dm_overview_review} 
 In 1999 Gondolo and Silk proposed that dark matter could be detected 
-indirectly by a self-annihilation signal from galactic centres \citep{GS_1999_original}. % Note: Re-read the BSW article thoroughly
+indirectly by a self-annihilation signal from galactic centres \citep{GS_1999}. % Note: Re-read the BSW article thoroughly
 The study proposed a simple analytical mechanism in which dark matter density could produce a highly dense spike near the centres of galaxies 
 as a consequence of adiabatic growth. The model was analytical, and relied heavily on simplifying assumptions, such as the black hole residing 
 at the centre of the galaxy throughout the adiabatic (slow) growth, and there being no merger events. % Clarify and structure this paragraph a bit later
@@ -226,8 +187,8 @@ We propose to investigate dark matter distributions formed
 as a consequence of both adiabatic and non-adiabatic growth near Kerr black holes, 
 as well as calculate prospective annihilation signals. 
 Additionally, we will extend the research to investigate possible perturbations to 
-stellar orbits, similarly as in \citep{Sadeghian_Ferrer_Will_2013}. 
-% Note: The above sentence needs more justification; just saying we do it because they did it is kind of lame
+stellar orbits, motivated by the study in \citep{Sadeghian_Ferrer_Will_2013}. 
+% Note: The above sentence needs more justification; we can't say we did it just because they did it
 
 % The problem becomes fairly simple under the assumption of weakly or non-interacting dark matter, where we can 
 % assume that the inter-particle interactions as well as e.g. gravitational scattering from stars become negligible. 
@@ -245,7 +206,7 @@ calculating photon emissions.
 \subsection{Theory}
 
 % Include very detailed process of how we get from step A to step B; this section and the Methods section should ideally complement each other
-% Note: Add only a few equations
+% Note: Add only a few equations; nothing is set in stone
 
 Our aim is to calculate the evolution of the phase space of dark matter near Kerr black holes. For this, we choose to proceed by the 
 following steps:
@@ -267,13 +228,16 @@ following steps:
 
 % Short summary; this is very informal so add a bit of structure and perhaps add this into a separate subsection
 The theory for this has already been established; we need the knowledge of boundary conditions, which is found to be 
-an approximately Maxwellian velocity distribution \citep{dm_halo_maxwellian}. For calculating geodesics, we can use 
-existing literature on Kerr metric and the geodesics in them \citep{does_this_even_need_a_citation}. For evolving 
-the phase space, we choose to use the particle approach and to sample the phase space, as documented in e.g. 
-\citep{schnittman2015}\citep{any_vlasov_PIC_paper}, with the assumption that the phase space will 
+an approximately Maxwellian velocity distribution \citep{dm_halo_maxwellian} with small anisotropies. 
+For calculating geodesics, we can use 
+existing literature on Kerr metric and geodesics. Evolving the 
+phase space will be done by using a well-known particle approach and by sample the phase space, 
+as documented in e.g. 
+\citep{kuhlen2012numerical,schnittman2015}, with the assumption that the phase space will 
 reach a stable state. For evolving the Kerr metric, we use a simple step function: $M_0 \rightarrow M_1$. Evolving 
 the existing phase space will then be straightforward by the already established methods.
 % TODO: Finish the above paragraph
+% TODO: Explain how we can reduce the dimensions of the problem; this is actually *essential*
 
 
 % Note: finish this or drop it completely. It may not really offer much to introduce the Boltzmann equation, since we're anyway sampling the phase space based on
@@ -314,24 +278,28 @@ the existing phase space will then be straightforward by the already established
 %  approximateboundorbits
 % \end{equation}
 
-For more detailed derivations, please see Appendix \ref{appendix:theory}.
+For more detailed derivations, please see Appendix %\ref{appendix:theory}.
 
 \subsubsection{Initial conditions}
+
+% We should explain how we get the temperature and velocity dispersion; presumably from observations
 
 We begin by shooting non-interacting dark matter particles from radius $r_0$, far outside the reach of the black hole. 
 % Note: is the approximation of dominating Kerr 'potential' valid here?
 For the boundary conditions, we use thermal distribution function, shown to be a good approximation in most 
-dark matter halos \citep{dm_halo_maxwellian}:
+dark matter halos:
 
 \begin{equation}
  thermaldistribution
 \end{equation},
 
-where .., and we choose $T$ to be \citep{should_be_known}. % Or velocity dispersion, same thing
+where .., and we choose $T$ to be %\citep{should_be_known}. % Or velocity dispersion, same thing
 
 \subsubsection{Reaching a stable state}
 
-Our aim is to construct 
+% TODO: Finish the math
+
+Our aim is to 
 
 
 \subsection{Methods}
@@ -351,7 +319,7 @@ The research will be largely theoretical and numerical. A few essential ingredie
  \item * Geodesic integrators
  \item * High-performance code % Modify this
  \item * Kerr metric
- \item ^ Emission from dark matter annihilations
+ \item \^ Emission from dark matter annihilations
  \item Dynamically allocated phase-space sampling
  \item Dynamic metric; step-function
  \item Criterion for bound orbits
@@ -360,14 +328,14 @@ The research will be largely theoretical and numerical. A few essential ingredie
  \item (Scattering effects)
 \end{enumerate},
 
-where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (^) have been partially implemented. 
+where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (\^) have been partially implemented. 
 Entries within clauses will be optional.
 
 \textbf{Dynamically allocated phase-space sampling}; we will use the well-known approach used in most numerical recipes that require 
 a sparse grid, which was also used in the recent article by Schnittman \citep{schnittman2015}. % I feel a bit like citing one of Vlasiator articles, since we need to also show we are qualified to go through with the research
 We will implement the distribution function on a binned grid by assigning a weigh on the grid by the corresponding time each particle spends in 
 that grid bin. We will choose to record the full distribution function $f(x^\mu,p^\nu)$ only in places of high density due to the otherwise 
-huge memory requirement ($\approx 10^3^5$ bins).
+huge memory requirement ($\approx (10^3)^5$ bins).
 
 \textbf{Dynamic metric; step-function}; a step-function for mass will be implemented, which will be used to evolve the Kerr metric. 
 Luckily, GYOTO has support for changing the metric via a plugin, or even include numerically evolving metrics, and so we will 
@@ -386,7 +354,7 @@ for excluding orbits that either go too far to contribute to the overall phase s
 
 \subsection{Data analysis}
 
-% Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_2009} and Schnittman's paper.
+% Previous detection efforts should be here; try to avoid involving too much observations. The basic equations for e.g. neutrino flux were already made in both \citep{GS_1999} and Schnittman's paper.
 % Note: GYOTO offers ray-tracing and constructing images so obviously it should be used here
 % TODO: Re-read the 2011 Vincent GYOTO article and execute a few sample codes in GYOTO 
 
@@ -446,5 +414,8 @@ for excluding orbits that either go too far to contribute to the overall phase s
 \section{Schedule}
 
 % This might be a bit hard to estimate but say a few words about our schedule.
+
+\bibliography{proposal} 
+\bibliographystyle{plain}
 
 \end{document}
