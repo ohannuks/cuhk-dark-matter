@@ -1,7 +1,29 @@
-\documentclass[a4paper,10pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{natbib}
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+\usepackage{epsfig}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\pagestyle{empty}
+\usepackage{color}
+%\usepackage[all,dvips]{xy}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+\setlength{\textheight}{8.5in} \setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.0in} \setlength{\headsep}{0.0in}
+\setlength{\leftmargin}{0.5in}
+\setlength{\oddsidemargin}{0.0in}
+%\setlength{\parindent}{1pc}
+\setlength{\textwidth}{6.5in}
+%\linespread{1.6}
 
 %opening
 \title{}
@@ -18,31 +40,41 @@
 
 \end{abstract}
 
+\newpage
+
+\tableofcontents
+
+\newpage
+
 \section{Introduction}
 
 % Comments: should be separated into Introduction and Review of Previous Research
 % - Needs to have more things about detection efforts and fruits of research, more motivation
 
+% This needs some serious improvements; the introduction is completely scattered
+
 % Note: Since we claim to investigate local dynamics, we could mention a few words on the prospects in the following sections. Or drop the sentence 
+% Note: The first paragraph needs to be *perfect*
 We propose to investigate dark matter distributions near black hole horizons using GYOTO software to ray-trace dark matter 
 particles in a dynamic astrophysical setting with a 
 growing black hole. The 
 research is motivated due to both the growing interest in indirect 
 detection of dark matter by astrophysical signals such as 
-neutrino and gamma-ray signals 
+neutrino- and gamma-ray signals 
 \citep{2015_Arina_Silk}  % Note: this could be modified
 %\citep{indirect_detection_of_dm}
 , as well as prospects of investigating 
-local dynamics of AGNs and massive black holes in a more general 
-context. For a review of indirect dark matter detection, see for example 
-\citep{bergstrom2012dark_review_indirect_direct}. %Note: http://arxiv.org/pdf/1310.7040v1.pdf might be a good review; this is probably not a good review!
+local dynamics of %active galactic nuclei and 
+massive black holes in a general 
+context. 
+% For a review of indirect dark matter detection, see for example 
+% \citep{bergstrom2012dark_review_indirect_direct}. %Note: http://arxiv.org/pdf/1310.7040v1.pdf might be a good review; this is probably not a good review!
 
-Previous work by Jeremy Schittman 
-\citep{schnittman2015}, studied distributions of dark matter 
+Previous work by Jeremy Schittman studied distributions of dark matter 
 around Kerr black holes numerically both by shooting dark matter particles 
 from infinity according to a thermal velocity distribution, and by 
 choosing particles according to Maxwell-Juttner distribution near the 
-Kerr black hole horizon.
+Kerr black hole horizon \citep{schnittman2015}.
 The Maxwell-Juttner distribution was 
 chosen to simulate a dark matter density spike motivated by analytical 
 studies of dark matter distributions around Schwarzschild black holes 
@@ -51,28 +83,34 @@ by Gondolo and Silk \citep{GS_1999}
 and a more recent, fully general relativistic, extension by Sadeghian et al. 
 \citep{Sadeghian_Ferrer_Will_2013}.
 
+% TODO: Break into two paragraphs; one paragraph for adiabatic growth, one paragraph for numerical work, which include criticism
+
 The previous analytical work has concerned Schwarzschild black holes 
 and adiabatic growth \citep{GS_1999, Sadeghian_Ferrer_Will_2013}, as well 
-as two-component models including gravitational scattering of stars 
-with dark matter,
-whereas the numerical work by Jeremy Schnittman 
+as two-component models capturing gravitational scattering of stars 
+with dark matter. Numerical work by Jeremy Schnittman 
 addressed static Kerr black holes by assuming a Maxwell-Juttner 
 distribution.
 % For why adiabatic growth is bad: find the source that claims that stellar densities in slowly growing systems don't seem to be dense enough
+
 The adiabatic growth model has been under pressure, as 
 the model relies on long central relaxation times and stable 
 evolution throughout the galaxy's history 
 \citep{ullio2001spike_criticism, merritt2002merger_criticism, bertone2005}.
 % Summarize in 1 sentence why adiabatic growth is bad:
 Additionally, such adiabatic growth should affect stellar matter 
-in a similar fashion, forming steep cusps. Additionally, such cusps have not been 
+in a similar fashion, forming steep cusps. Thus far such cusps have not been 
 observed \citep{merritt2006dynamics}. % Note: This paper needs to be read -very carefully-
 % Explain somewhere that Maxwell-Juttner distribution assumes a thermalized distribution (DM doesnt thermalize by itself) and that in the Schnittman article it was first shown that the DM distributions dont follow Maxwell-Juttner distributions 
 % Motivate the following a bit more:
+
+
 We propose to extend the previous research to realistic astrophysical 
-settings such as quick growth of a black hole due to a merging event by 
-relaxing the assumption of adiabatic growth and without assuming a 
-Maxwell-Juttner distribution. 
+settings such as quick growth of a black hole due to a possible merging event, 
+relaxing the assumption of adiabatic growth. Additionally, 
+we will improve upon the previous research by attempting to 
+construct a dark matter density spike self-consistently instead of 
+populating the near-vicinity of a black hole with Maxwell-Juttner distribution.
 % The following is a paragraph I removed because I feel it is not justified:
 %We hope a faster growth event would 
 %among others give more stringent limits on dark matter annihilation, 
@@ -100,19 +138,23 @@ Maxwell-Juttner distribution.
 
 
 Dark matter is an active research area in cosmology, astrophysics as well as particle physics. 
-The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, 
+The current research on dark matter largely focuses on the so far 
+unknown particle properties of dark matter and how they affect the universe, 
 both on small and large scales. %\citep{dm_overview_review} 
+
+% TODO: While this is a review, the word form should always be present form
 In 1999 Gondolo and Silk proposed that dark matter could be detected 
 indirectly by a self-annihilation signal from galactic centres \citep{GS_1999}. % Note: Re-read the BSW article thoroughly
 The study proposed a simple analytical mechanism in which dark matter density could produce a highly dense spike near the centres of galaxies 
 as a consequence of adiabatic growth. The model was analytical, and relied heavily on simplifying assumptions, such as the black hole residing 
-at the centre of the galaxy throughout the adiabatic (slow) growth, and there being no merger events. % Clarify and structure this paragraph a bit later
-
+at the centre of the galaxy throughout the adiabatic (slow) growth. Additionally, 
+the model allowed no merger events or perturbations to the system.% Clarify and structure this paragraph
 Since then, the existence of such a proposed spike has been researched extensively in hopes of 
 indirectly detecting dark matter \citep{gondolo2000dmsearch,bertone2001dmsearch}. % Note to self: dump the observational citations into one sentence
-On theoretical side, some more complex extensions to the original theory have been considered, notably non-adiabatic growth models 
-\citep{ullio2001spike_criticism}, as well as two-component Fokker-Planck models independent of initial conditions that would produce a 
-smaller mini spike have been considered\citep{gnedin_primack_2004}.  % Gnedin article should be read -very carefully- and see also the criticism on it
+
+On theoretical side, some more complex extensions to the original theory have been made, notably non-adiabatic growth models 
+\citep{ullio2001spike_criticism}, and two-component Fokker-Planck models independent of initial conditions which predicts a 
+smaller mini spike \citep{gnedin_primack_2004}.  % Gnedin article should be read -very carefully- and see also the criticism on it
 % Improve sentence structure; break into two sentences; and add both of the citations to the end
 % Note: the Fokker-Planck model should have some more visibility, it deserves it.
 
@@ -136,7 +178,7 @@ smaller mini spike have been considered\citep{gnedin_primack_2004}.  % Gnedin ar
 %  until Banados, Silk and White proposed a mechanism in which Kerr 
 % black holes could act as particle accelerators \citep{BSW_mechanism}. 
 
-In 2013, the theory, under the assumption of adiabatic growth, 
+In 2013, the dark matter spike theory, under the assumption of adiabatic growth, 
 was extended to include general relativistic effects in Schwarzschild metric, 
 which implied a shift of the density peak nearer to the black hole  
 and an increate in the magnitude of the dark matter spike 
@@ -146,10 +188,10 @@ Kerr black holes. Even more recently, in 2015, Schnittman
 studied Kerr black holes and potential dark matter annihilation signal 
 numerically by building a density peak from a Maxwell-Juttner 
 distribution near the black hole horizon and calculated 
-the potential gamma-ray spectra considering selected 
+the potential gamma-ray spectra within selected 
 dark matter models. 
 % Structure the following better
-The study did not simulate the adiabatic 
+Notably, the study did not simulate the adiabatic 
 growth itself, but built the peak by populating particles 
 near the horizon.
 
@@ -165,15 +207,18 @@ increasingly more important, as it
 is believed to exclude some of the dark matter models, and is 
 being used to narrow down the dark matter parameter space \citep{gondolo2000dmsearch,bertone2001dmsearch,fields2014galactic}. 
 The existence of the said spike is brought to question by 
-considering non-adiabatic growth and scattering off of dense 
-stellar matter \citep{ullio2001spike_criticism}. 
-On another other front it is 
-argued that such highly dense stellar matter could not have existed 
-for so long. %\citep{I_dont_remember_this_one}. Note: also, the above sentence is kind of vague
-It is also argued that scattering would in fact provide a mechanism 
-to create 
-minispikes in the first place \citep{gnedin_primack_2004}. The 
-fate of these highly dense spikes is still undecided, and establishing a firm basis for the 
+considering non-adiabatic growth and scattering off of highly dense 
+stellar matter \citep{ullio2001spike_criticism, merritt2002merger_criticism}. 
+% Note: There is more criticism than just this one; it *needs* to be here
+This is still unclear, as it is also 
+argued that such dense stellar matter could not have existed 
+for long. %\citep{I_dont_remember_this_one}. Note: also, the above sentence is kind of vague
+% It is also argued that scattering would in fact provide a mechanism 
+% to create 
+% minispikes in the first place \citep{gnedin_primack_2004}. 
+% The following is too much like a story
+The 
+fate of these highly dense spikes is still undecided, establishing a firm basis for the 
 theory is clearly needed.
 % Clarify what you mean here :)
 
@@ -186,6 +231,7 @@ theory is clearly needed.
 We propose to investigate dark matter distributions formed 
 as a consequence of both adiabatic and non-adiabatic growth near Kerr black holes, 
 as well as calculate prospective annihilation signals. 
+% Note: very careful with the following, since we haven't really looked into the investigation on no-hair theory
 Additionally, we will extend the research to investigate possible perturbations to 
 stellar orbits, motivated by the study in \citep{Sadeghian_Ferrer_Will_2013}. 
 % Note: The above sentence needs more justification; we can't say we did it just because they did it
@@ -227,14 +273,15 @@ following steps:
 \end{enumerate}
 
 % Short summary; this is very informal so add a bit of structure and perhaps add this into a separate subsection
-The theory for this has already been established; we need the knowledge of boundary conditions, which is found to be 
+The theory for most of the above has already been established; 
+we need the knowledge of boundary conditions, which is found to be 
 an approximately Maxwellian velocity distribution \citep{dm_halo_maxwellian} with small anisotropies. 
 For calculating geodesics, we can use 
 existing literature on Kerr metric and geodesics. Evolving the 
 phase space will be done by using a well-known particle approach and by sample the phase space, 
 as documented in e.g. 
 \citep{kuhlen2012numerical,schnittman2015}, with the assumption that the phase space will 
-reach a stable state. For evolving the Kerr metric, we use a simple step function: $M_0 \rightarrow M_1$. Evolving 
+reach a stable state. For evolving the Kerr metric, we use a simple step function. Evolving 
 the existing phase space will then be straightforward by the already established methods.
 % TODO: Finish the above paragraph
 % TODO: Explain how we can reduce the dimensions of the problem; this is actually *essential*
@@ -278,22 +325,18 @@ the existing phase space will then be straightforward by the already established
 %  approximateboundorbits
 % \end{equation}
 
-For more detailed derivations, please see Appendix %\ref{appendix:theory}.
+For more detailed derivations, please see Appendix \ref{appendix:theory}.
 
 \subsubsection{Initial conditions}
 
 % We should explain how we get the temperature and velocity dispersion; presumably from observations
+% TODO: Finish
 
 We begin by shooting non-interacting dark matter particles from radius $r_0$, far outside the reach of the black hole. 
 % Note: is the approximation of dominating Kerr 'potential' valid here?
 For the boundary conditions, we use thermal distribution function, shown to be a good approximation in most 
-dark matter halos:
+dark matter halos
 
-\begin{equation}
- thermaldistribution
-\end{equation},
-
-where .., and we choose $T$ to be %\citep{should_be_known}. % Or velocity dispersion, same thing
 
 \subsubsection{Reaching a stable state}
 
@@ -311,15 +354,14 @@ Our aim is to
 % For the future: Local consequences? A few words should suffice and should still be within the scope of this proposal
 % Note: we should have something more novel and exciting here
 
-\subsubsection{Technical}
 
-The research will be largely theoretical and numerical. A few essential ingredients that need to be implemented:
+The research will be largely numerical. A few essential ingredients that need to be implemented:
 
 \begin{enumerate}
  \item * Geodesic integrators
  \item * High-performance code % Modify this
  \item * Kerr metric
- \item \^ Emission from dark matter annihilations
+ \item \% Emission from dark matter annihilations
  \item Dynamically allocated phase-space sampling
  \item Dynamic metric; step-function
  \item Criterion for bound orbits
@@ -328,21 +370,24 @@ The research will be largely theoretical and numerical. A few essential ingredie
  \item (Scattering effects)
 \end{enumerate},
 
-where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (\^) have been partially implemented. 
-Entries within clauses will be optional.
+where entries marked with (*) have been implemented in GYOTO \citep{gyoto_vincent_2011} and entries marked with (\%) have been partially implemented. 
+Entries within clauses will be possible extensionsl.
 
 \textbf{Dynamically allocated phase-space sampling}; we will use the well-known approach used in most numerical recipes that require 
 a sparse grid, which was also used in the recent article by Schnittman \citep{schnittman2015}. % I feel a bit like citing one of Vlasiator articles, since we need to also show we are qualified to go through with the research
 We will implement the distribution function on a binned grid by assigning a weigh on the grid by the corresponding time each particle spends in 
 that grid bin. We will choose to record the full distribution function $f(x^\mu,p^\nu)$ only in places of high density due to the otherwise 
-huge memory requirement ($\approx (10^3)^5$ bins).
+huge memory requirement ($\approx (10^3)^5$ bins)\citep{schnittman2015}.
 
 \textbf{Dynamic metric; step-function}; a step-function for mass will be implemented, which will be used to evolve the Kerr metric. 
 Luckily, GYOTO has support for changing the metric via a plugin, or even include numerically evolving metrics, and so we will 
-implement this in GYOTO.
+implement this within GYOTO framework.
 
 \textbf{Criterion for bound orbits}; well-known approximate results for bound orbits will be used, and we will have an additional criterion 
-for excluding orbits that either go too far to contribute to the overall phase space, or hit the black hole horizon.
+for excluding orbits that either go too far to contribute to the overall phase space, or hit the black hole horizon. These can be found in 
+\citep{Sadeghian_Ferrer_Will_2013, schnittman2015}.
+
+\textbf{Annihilation}; 
 
 % Note: we have not really discussed this, so don't say anything yet.
 % Note: Annihilation should be possible to do during the construction of phase space, and during/after the evolution phase in a more realistic 
@@ -362,7 +407,7 @@ for excluding orbits that either go too far to contribute to the overall phase s
 
 % Bad title; add something about expected results and what we want to do with the data we're getting
 
-\subsection{Summary of actions to take}
+\subsection{Summary of actions}
 
 
 % TODO: This is largely unfinished, and most of the items are not covered in the proposal!
@@ -414,6 +459,13 @@ for excluding orbits that either go too far to contribute to the overall phase s
 \section{Schedule}
 
 % This might be a bit hard to estimate but say a few words about our schedule.
+
+\appendix
+\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+
+\subsection{Theory} \label{appendix:theory}
 
 \bibliography{proposal} 
 \bibliographystyle{plain}
