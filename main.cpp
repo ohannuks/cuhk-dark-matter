@@ -597,8 +597,8 @@ namespace tests {
        // V=(Power(c,2) + Power(L,2)/(Power(mp,2)*Power(r,2)))*(1 - Rs/r)
        E_min=(pow(c,2) + pow(L,2)/(pow(mp,2)*pow(r2,2)))*(1. - Rs/r2);
        E_max=(pow(c,2) + pow(L,2)/(pow(mp,2)*pow(r1,2)))*(1. - Rs/r1);
-       assert( E_min <= E );
-       assert( E <= E_max );
+       assert( E_min <= eps );
+       assert( eps <= E_max );
     }
   }
 
@@ -618,6 +618,8 @@ namespace tests {
       const Real Lmax = BlackHole::Lmax(r,eps);
       const Real L = Lmin + (Lmax-Lmin)*j/(Real)(N+1);
       const Real I_bh = BlackHole::II_radial(eps, L);
+      cout << epsmin << " " << epsmax << " " << Lmin << " " << Lmax << endl;
+      schwarzschild::check_effective_potential_limits( eps, L);
       schwarzschild::check_u_limits(eps,L);
       assert( eps > 0 && L > 0 );
       assert( Lmin <= L && L <= Lmax );

@@ -72,4 +72,7 @@
     <note priority="medium" time="1448245564">
         Check the E and L limits; there could be something funny going on with the angular momentum limits from the u_limits derivation file. It says the angular momentum has an upper bound and lower bound  between &lt;0 and &gt;0, while I think the bounds should be larger than zero at all times
     </note>
+    <note priority="medium" time="1449711390">
+        the check_effective_potential has wrong eps; switch to dimensionless
+    </note>
 </todo>

@@ -5,6 +5,8 @@
 \title{}
 \author{}
 
+
+
 \begin{document}
 
 \maketitle
@@ -63,22 +65,24 @@
 
 % Note: Since we claim to investigate local dynamics, we could mention a few words on the prospects in the following sections. Or drop the sentence 
 We propose to investigate dark matter distributions near black hole horizons using GYOTO software to ray-trace dark matter 
-particles in a realistic, dynamic astrophysical setting with a 
+particles in a dynamic astrophysical setting with a 
 growing black hole. The 
 research is motivated due to both the growing interest in indirect 
 detection of dark matter by astrophysical signals such as 
-neutrino and gamma-ray signals \citep{GS_neutrino_search} 
-\citep{indirect_detection_of_dm}, as well as prospects of investigating 
+neutrino and gamma-ray signals \citep{2015_Arina__Silk}  % Note: this could be modified
+%\citep{indirect_detection_of_dm}
+, as well as prospects of investigating 
 local dynamics of AGNs and massive black holes in a more general 
-context. For a review of indirect dark matter detection, see 
-\citep{indirect_detection_review}. %Note: http://arxiv.org/pdf/1310.7040v1.pdf might be a good review
+context. For a review of indirect dark matter detection, see for example 
+\citep{bergstrom2012dark_review_indirect_direct}. %Note: http://arxiv.org/pdf/1310.7040v1.pdf might be a good review; this is probably not a good review!
 
 Previous work by Jeremy Schittman 
-\citep{schnittman2015}, which studied distributions of dark matter 
+\citep{schnittman2015}, studied distributions of dark matter 
 around Kerr black holes numerically both by shooting dark matter particles 
-from infinity according to a thermal velocity distribution and by 
+from infinity according to a thermal velocity distribution, and by 
 choosing particles according to Maxwell-Juttner distribution near the 
-Kerr black hole horizon. The Maxwell-Juttner distribution was 
+Kerr black hole horizon.
+The Maxwell-Juttner distribution was 
 chosen to simulate a dark matter density spike motivated by analytical 
 studies of dark matter distributions around Schwarzschild black holes 
 as a consequence of adiabatic growth investigated originally by 
@@ -87,10 +91,21 @@ and a more recent, fully general relativistic, extension by Sadeghian et al.
 \citep{Laleh_GR_DM_distributions}.
 
 The previous analytical work has concerned Schwarzschild black holes 
-and adiabatic growth, whereas the numerical work by Jeremy Schnittman 
+and adiabatic growth \citep{GS_2009, Laleh_GR_DM_distributions}, as well 
+as two-component models including gravitational scattering of stars 
+with dark matter,
+whereas the numerical work by Jeremy Schnittman 
 addressed static Kerr black holes by assuming a Maxwell-Juttner 
 distribution.
-% Summarize in 1 sentence why adiabatic growth is bad
+% For why adiabatic growth is bad: find the source that claims that stellar densities in slowly growing systems don't seem to be dense enough
+The adiabatic growth model has been under pressure, as 
+the model relies on long central relaxation times and stable 
+evolution throughout the galaxy's history 
+\citep{ullio2001spike_criticism, merritt2002merger_criticism, bertone2005}.
+% Summarize in 1 sentence why adiabatic growth is bad:
+Additionally, such adiabatic growth should affect stellar matter 
+in a similar fashion, forming steep cusps. Additionally, such cusps have not been 
+observed \citep{merritt2006dynamics}. % Note: This paper needs to be read -very carefully-
 % Explain somewhere that Maxwell-Juttner distribution assumes a thermalized distribution (DM doesnt thermalize by itself) and that in the Schnittman article it was first shown that the DM distributions dont follow Maxwell-Juttner distributions 
 % Motivate the following a bit more:
 We propose to extend the previous research to realistic astrophysical 
@@ -116,23 +131,31 @@ Maxwell-Juttner distribution.
 
 % TODO: there's no discussion on annihilation signal from photons or neutrinos
 
-% TODO: No discussion on star orbits
+% TODO: No discussion on star orbits (possible local effects of a DM spike)
+
+% TODO: None of the articles here have been criticized clearly, and while their shortcomings have been pointed out they're usually vague
+
+% Note: the paragraphs are scattered; each paragraph should tell a story
 
 
-Dark matter is an active research area in cosmology, astrophysics as well as particle physics. It is believed to make up about 85\% of the matter 
-content in the universe. The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, 
-both on small and large scales \citep{this_probably_doesnt_need_a_citation}. In 1999 Gondolo and Silk proposed that dark matter could be detected 
+Dark matter is an active research area in cosmology, astrophysics as well as particle physics. 
+The current research on dark matter largely focuses on what dark matter is made of and how it affects the universe, 
+both on small and large scales. %\citep{dm_overview_review} 
+In 1999 Gondolo and Silk proposed that dark matter could be detected 
 indirectly by a self-annihilation signal from galactic centres \citep{GS_1999_original}. % Note: Re-read the BSW article thoroughly
 The study proposed a simple analytical mechanism in which dark matter density could produce a highly dense spike near the centres of galaxies 
 as a consequence of adiabatic growth. The model was analytical, and relied heavily on simplifying assumptions, such as the black hole residing 
 at the centre of the galaxy throughout the adiabatic (slow) growth, and there being no merger events. % Clarify and structure this paragraph a bit later
 
 Since then, the existence of such a proposed spike has been researched extensively in hopes of 
-indirectly detecting dark matter \citep{lots_of_citations_should_be_easy_to_find}. % Note to self: dump the observational citations into one sentence
+indirectly detecting dark matter \citep{gondolo2000dmsearch,bertone2001dmsearch}. % Note to self: dump the observational citations into one sentence
 On theoretical side, some more complex extensions to the original theory have been considered, notably non-adiabatic growth models 
-\citep{P_Ullio_2001}, as well as two-component Fokker-Planck models independent of initial conditions have been considered\citep{gnedin_primack_2004}. 
+\citep{ullio2001spike_criticism}, as well as two-component Fokker-Planck models independent of initial conditions that would produce a 
+smaller mini spike have been considered\citep{gnedin_primack_2004}.  % Gnedin article should be read -very carefully- and see also the criticism on it
 % Improve sentence structure; break into two sentences; and add both of the citations to the end
 % Note: the Fokker-Planck model should have some more visibility, it deserves it.
+
+% TODO: Add a paragraph on criticism
 
 % In 2001, P. Ullio et al. considered dynamical processes and concluded that in the case of a simple toy model and considering 
 % only circular orbits, the DM spike would be weakened by non-adiabatic, fast growth.
@@ -143,7 +166,8 @@ On theoretical side, some more complex extensions to the original theory have be
 % due to gravitational scattering by dense stellar matter. 
 % Note, for us this could be even more important than the adiabatic growth searches, especially if we will be eventually interested in AGNs.
 
-% Special notes: SIDM cluster: http://journals.aps.org/prd/pdf/10.1103/PhysRevD.89.023506 ; assuming equilibrium solution, one can use weakly collisional approximation to solve cusps in galactic centres (formulated in GR treatment). In this case gravitational (similat to plasma coulomb) interaction was adopted.
+% Special notes: SIDM cluster: http://journals.aps.org/prd/pdf/10.1103/PhysRevD.89.023506 ; assuming equilibrium solution, one can use weakly 
+%collisional approximation to solve cusps in galactic centres (formulated in GR treatment). In this case gravitational (similat to plasma coulomb) interaction was adopted.
 
 % Note: BSW mechanism should be mentioned but maybe not here
 % Until 2011, the theories concerned only newtonian theories (save for ad-hoc corrections 
@@ -151,10 +175,9 @@ On theoretical side, some more complex extensions to the original theory have be
 %  until Banados, Silk and White proposed a mechanism in which Kerr 
 % black holes could act as particle accelerators \citep{BSW_mechanism}. 
 
-
 In 2013, the theory, under the assumption of adiabatic growth, 
 was extended to include general relativistic effects in Schwarzschild metric, 
-implying a shift of the density peak nearer to the black hole  
+which implied a shift of the density peak nearer to the black hole  
 and an increate in the magnitude of the dark matter spike 
 \citep{Sadeghian_Ferrer_Will_2013}. The study
 also provided a natural formalism to extend the analysis to 
@@ -163,13 +186,15 @@ studied Kerr black holes and potential dark matter annihilation signal
 numerically by building a density peak from a Maxwell-Juttner 
 distribution near the black hole horizon and calculated 
 the potential gamma-ray spectra considering selected 
-dark matter models. The study did not simulate the adiabatic 
+dark matter models. 
+% Structure the following better
+The study did not simulate the adiabatic 
 growth itself, but built the peak by populating particles 
 near the horizon.
 
-% Add a citation  on the motivation from observations, but don't comment on the specifics
+% TODO Add a citation  on the motivation from observations, but don't comment on the specifics
 
-% ADD a paragraph on criticism
+% TODO ADD a paragraph on criticism
 
 % Either remove or modify the following paragraph
 % This is not really the main topic of the proposal, but it is being framed that way
@@ -177,12 +202,12 @@ near the horizon.
 Currently, the existence of such a density spike has become 
 increasingly more important, as it  
 is believed to exclude some of the dark matter models, and is 
-being used to narrow down the dark matter parameter space \citep{observational_get_it_from_the_criticism_article}. 
+being used to narrow down the dark matter parameter space \citep{gondolo2000dmsearch,bertone2001dmsearch,fields2014galactic}. 
 The existence of the said spike is brought to question by 
 considering non-adiabatic growth and scattering off of dense 
-stellar matter \citep{P_Ullio_2001}. On another other front it is 
+stellar matter \citep{ullio2001spike_criticism}. On another other front it is 
 argued that such highly dense stellar matter could not have existed 
-for so long \citep{I_dont_remember_this_one}. 
+for so long. %\citep{I_dont_remember_this_one}. 
 It is also argued that scattering would in fact provide a mechanism 
 to create 
 minispikes in the first place \citep{gnedin_primack_2004}. The 
@@ -258,7 +283,7 @@ huge memory requirement ($\approx 10^3^5$ bins).
 % Local effects of DM distributions for e.g. AGNs, orbits, etc. See the mindmap
 % Should we mention anything about observations here? It is the logical 'next step' but we should be able to convince we actually have the resources to follow through with it, given 
 % that we don't have observational people to consult to
-
+% TODO: Note: Should we have some strategy for finding observational people? In-house?
 
 \section{Summary}
 
